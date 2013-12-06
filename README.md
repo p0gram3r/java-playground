@@ -1,4 +1,4 @@
-jApacheFopDemo
+#jTestFopDemo
 ==============
 
-playground for demo project using Apache FOP
+demo project using Apache FOP for creating PDF documents
