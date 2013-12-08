@@ -1,3 +1,3 @@
-#\_test_ApacheFop
+#jPlaygound
 
-demo project using Apache FOP for creating PDF documents
+playground for some very basic java programs
