@@ -1,4 +1,4 @@
-package ae.test.projecteuler.problem2;
+package problem2;
 
 public class EvenFibonacciNumbers
 {
