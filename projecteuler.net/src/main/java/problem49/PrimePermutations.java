@@ -21,12 +21,12 @@ public class PrimePermutations
 	{
 		for (int number1 = 1001; number1 < 3333; number1 += 2)
 		{
-			if (!NumberUtils.isPrim(number1))
+			if (!IntegerUtils.isPrim(number1))
 			{
 				continue;
 			}
 
-			Collection<Integer> permutions = NumberUtils.getPermutations(number1);
+			Collection<Integer> permutions = IntegerUtils.getPermutations(number1);
 
 			for (int number2 : permutions)
 			{
@@ -35,7 +35,7 @@ public class PrimePermutations
 					continue;
 				}
 
-				if (!NumberUtils.isPrim(number2) || !permutions.contains(number2))
+				if (!IntegerUtils.isPrim(number2) || !permutions.contains(number2))
 				{
 					continue;
 				}
@@ -43,7 +43,7 @@ public class PrimePermutations
 				int delta = number2 - number1;
 				int number3 = number2 + delta;
 
-				if (!NumberUtils.isPrim(number3) || !permutions.contains(number3))
+				if (!IntegerUtils.isPrim(number3) || !permutions.contains(number3))
 				{
 					continue;
 				}

@@ -7,12 +7,12 @@ import java.util.Collection;
 
 import org.junit.Test;
 
-public class NumberUtilsTest
+public class IntegerUtilsTest
 {
 	@Test
 	public void getPermutationsForOneDigits()
 	{
-		Collection<Integer> permutions = NumberUtils.getPermutations(1);
+		Collection<Integer> permutions = IntegerUtils.getPermutations(1);
 
 		assertEquals(1, permutions.size());
 		assertTrue(permutions.contains(1));
@@ -23,7 +23,7 @@ public class NumberUtilsTest
 	@Test
 	public void getPermutationsForTwoDigits()
 	{
-		Collection<Integer> permutions = NumberUtils.getPermutations(12);
+		Collection<Integer> permutions = IntegerUtils.getPermutations(12);
 
 		assertEquals(2, permutions.size());
 		assertTrue(permutions.contains(12));
@@ -35,7 +35,7 @@ public class NumberUtilsTest
 	@Test
 	public void getPermutationsForThreeDigits()
 	{
-		Collection<Integer> permutions = NumberUtils.getPermutations(123);
+		Collection<Integer> permutions = IntegerUtils.getPermutations(123);
 
 		assertEquals(6, permutions.size());
 		assertTrue(permutions.contains(123));
@@ -51,7 +51,7 @@ public class NumberUtilsTest
 	@Test
 	public void getPermutationsFor1000()
 	{
-		Collection<Integer> permutions = NumberUtils.getPermutations(1000);
+		Collection<Integer> permutions = IntegerUtils.getPermutations(1000);
 
 		assertEquals(1, permutions.size());
 		assertTrue(permutions.contains(1000));
@@ -62,7 +62,7 @@ public class NumberUtilsTest
 	@Test
 	public void getPermutationsRemovesDuplicates()
 	{
-		Collection<Integer> permutions = NumberUtils.getPermutations(111);
+		Collection<Integer> permutions = IntegerUtils.getPermutations(111);
 
 		assertEquals(1, permutions.size());
 	}

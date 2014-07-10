@@ -4,7 +4,7 @@ import java.math.BigInteger;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 
-public class NumberUtils
+public class IntegerUtils
 {
 
 	public static boolean isPrim(int number)
