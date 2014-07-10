@@ -45,4 +45,25 @@ public class NumberUtilsTest
 		assertTrue(permutions.contains(312));
 		assertTrue(permutions.contains(321));
 	}
+
+
+
+	@Test
+	public void getPermutationsFor1000()
+	{
+		Collection<Integer> permutions = NumberUtils.getPermutations(1000);
+
+		assertEquals(1, permutions.size());
+		assertTrue(permutions.contains(1000));
+	}
+
+
+
+	@Test
+	public void getPermutationsRemovesDuplicates()
+	{
+		Collection<Integer> permutions = NumberUtils.getPermutations(111);
+
+		assertEquals(1, permutions.size());
+	}
 }

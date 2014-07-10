@@ -30,7 +30,7 @@ public class PrimePermutations
 
 			for (int number2 : permutions)
 			{
-				if (number2 <= number1)
+				if (number2 == number1)
 				{
 					continue;
 				}

@@ -53,7 +53,11 @@ public class NumberUtils
 		if (start >= num.length)
 		{
 			Integer item = convertArrayToInteger(num);
-			result.add(item);
+			// only consider numbers greater than the original one
+			if (item >= BigInteger.TEN.pow(num.length - 1).intValue())
+			{
+				result.add(item);
+			}
 		}
 
 		for (int j = start; j < num.length; j++)
