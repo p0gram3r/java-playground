@@ -1,7 +1,6 @@
 package problem49;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 public class PrimePermutations
 {
@@ -20,39 +19,40 @@ public class PrimePermutations
 
 	public static void main(String[] args)
 	{
-		for (int number = 1001; number < 9999; number += 2)
+		for (int number1 = 1001; number1 < 3333; number1 += 2)
 		{
-			if (!NumberUtils.isPrim(number))
+			if (!NumberUtils.isPrim(number1))
 			{
 				continue;
 			}
 
-			List<Integer> permutions = NumberUtils.getPermutations(number);
-			permutions = removeNonPrimes(permutions);
+			Collection<Integer> permutions = NumberUtils.getPermutations(number1);
 
-			if (permutions.size() < 3)
+			for (int number2 : permutions)
 			{
-				continue;
+				if (number2 <= number1)
+				{
+					continue;
+				}
+
+				if (!NumberUtils.isPrim(number2) || !permutions.contains(number2))
+				{
+					continue;
+				}
+
+				int delta = number2 - number1;
+				int number3 = number2 + delta;
+
+				if (!NumberUtils.isPrim(number3) || !permutions.contains(number3))
+				{
+					continue;
+				}
+
+				System.out.println("" + number1 + number2 + number3);
 			}
 
-			System.out.println(permutions);
 		}
 
-	}
-
-
-
-	private static List<Integer> removeNonPrimes(List<Integer> numberList)
-	{
-		List<Integer> result = new ArrayList<Integer>(numberList.size());
-		for (Integer i : numberList)
-		{
-			if (NumberUtils.isPrim(i))
-			{
-				result.add(i);
-			}
-		}
-		return result;
 	}
 
 }

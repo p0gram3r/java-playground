@@ -3,7 +3,7 @@ package problem49;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.List;
+import java.util.Collection;
 
 import org.junit.Test;
 
@@ -12,7 +12,7 @@ public class NumberUtilsTest
 	@Test
 	public void getPermutationsForOneDigits()
 	{
-		List<Integer> permutions = NumberUtils.getPermutations(1);
+		Collection<Integer> permutions = NumberUtils.getPermutations(1);
 
 		assertEquals(1, permutions.size());
 		assertTrue(permutions.contains(1));
@@ -23,7 +23,7 @@ public class NumberUtilsTest
 	@Test
 	public void getPermutationsForTwoDigits()
 	{
-		List<Integer> permutions = NumberUtils.getPermutations(12);
+		Collection<Integer> permutions = NumberUtils.getPermutations(12);
 
 		assertEquals(2, permutions.size());
 		assertTrue(permutions.contains(12));
@@ -35,7 +35,7 @@ public class NumberUtilsTest
 	@Test
 	public void getPermutationsForThreeDigits()
 	{
-		List<Integer> permutions = NumberUtils.getPermutations(123);
+		Collection<Integer> permutions = NumberUtils.getPermutations(123);
 
 		assertEquals(6, permutions.size());
 		assertTrue(permutions.contains(123));

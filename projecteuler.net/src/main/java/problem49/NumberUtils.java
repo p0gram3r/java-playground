@@ -1,8 +1,8 @@
 package problem49;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.LinkedHashSet;
 
 public class NumberUtils
 {
@@ -37,18 +37,18 @@ public class NumberUtils
 
 
 
-	public static List<Integer> getPermutations(int number)
+	public static Collection<Integer> getPermutations(int number)
 	{
 		int[] num = convertIntegerToArray(number);
 
-		ArrayList<Integer> result = new ArrayList<Integer>();
+		Collection<Integer> result = new LinkedHashSet<Integer>();
 		permute(num, 0, result);
 		return result;
 	}
 
 
 
-	private static void permute(int[] num, int start, ArrayList<Integer> result)
+	private static void permute(int[] num, int start, Collection<Integer> result)
 	{
 		if (start >= num.length)
 		{
@@ -56,7 +56,7 @@ public class NumberUtils
 			result.add(item);
 		}
 
-		for (int j = start; j <= num.length - 1; j++)
+		for (int j = start; j < num.length; j++)
 		{
 			swap(num, start, j);
 			permute(num, start + 1, result);
