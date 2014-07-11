@@ -1,4 +1,4 @@
-package problem49;
+
 
 import java.math.BigInteger;
 import java.util.Collection;
