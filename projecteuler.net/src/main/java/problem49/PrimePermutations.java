@@ -1,8 +1,8 @@
 package problem49;
 
-import IntegerUtils;
-
 import java.util.Collection;
+
+import utils.IntegerUtils;
 
 public class PrimePermutations
 {
