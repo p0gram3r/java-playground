@@ -2,6 +2,7 @@ package probelm12;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -9,30 +10,26 @@ public class HighlyDivisibleTriangularNumber
 {
 	public static void main(String[] args)
 	{
-		// int i = 1;
-		// int divisorCount = 0;
-		//
-		// do
-		// {
-		// long number = calculateTriangleNumber(i);
-		// List<Long> primFactors = getPrimFactors(number);
-		//
-		// Collection<Long> allDivisors = getAllDivisors(primFactors);
-		//
-		// divisorCount = allDivisors.size();
-		// System.out.println(i + " -> " + number + ": " + divisorCount);
-		//
-		// i = i + 1;
-		// }
-		// while (divisorCount < 200);
+		int i = 1;
+		int divisorCount = 0;
 
-		long number = 54197677995L;
+		do
+		{
+			long number = calculateTriangleNumber(i);
 
-		Collection<Long> allDivisors = getAllDivisors(number);
-		System.out.println(allDivisors + " --> " + allDivisors.size());
+			Collection<Long> allDivisors = getAllDivisors(number);
 
-		int countDivisors = countDivisiors(number);
-		System.out.println(countDivisors);
+			divisorCount = allDivisors.size();
+			System.out.println(i + " -> " + number + ": " + divisorCount);
+
+			i = i + 1;
+		}
+		while (divisorCount < 500);
+
+		// long number = 54197677995L;
+		// Collection<Long> allDivisors = getAllDivisors(number);
+		// System.out.println(allDivisors);
+		// System.out.println(allDivisors.size());
 	}
 
 
@@ -49,14 +46,17 @@ public class HighlyDivisibleTriangularNumber
 		// all numbers can be divided by themselves
 		int count = 1;
 
+		Collection<Long> divs = new LinkedList<Long>();
+
 		for (long i = 1; i * 2 <= number; i++)
 		{
 			if (number % i == 0)
 			{
 				count++;
-				System.out.println(i);
+				divs.add(i);
 			}
 		}
+		System.out.println(divs);
 
 		return count;
 	}
@@ -88,18 +88,34 @@ public class HighlyDivisibleTriangularNumber
 		List<Long> primFactors = getPrimFactors(number);
 
 		Collection<Long> allDivisors = new TreeSet<Long>();
-
-		for (int i = 0; i < primFactors.size(); i++)
-		{
-			for (int j = i + 1; j < primFactors.size(); j++)
-			{
-				allDivisors.add(primFactors.get(i) * primFactors.get(j));
-			}
-		}
-
 		allDivisors.add(1L);
-		allDivisors.addAll(primFactors);
+		allDivisors.addAll(multiples(primFactors));
 
 		return allDivisors;
+	}
+
+
+
+	private static List<Long> multiples(List<Long> $list)
+	{
+		if ($list.size() <= 1)
+		{
+			return $list;
+		}
+
+		long $x = $list.remove(0);
+
+		List<Long> $res = new LinkedList<Long>();
+		$res.add($x);
+
+		List<Long> $sub = multiples($list);
+
+		for (long $item : $sub)
+		{
+			$res.add($item);
+			$res.add($x * $item);
+		}
+
+		return $res;
 	}
 }
