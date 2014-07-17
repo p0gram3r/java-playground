@@ -13,6 +13,9 @@ public class PrimeSummations
 {
 	public static void main(String[] args)
 	{
+		System.out.println("not yet solved!");
+		System.exit(1);
+
 		int number = 2;
 		int actualSummations;
 		int expectedSummations = 500;
