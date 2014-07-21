@@ -1,65 +1,72 @@
 package problem77;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-
-import org.apache.commons.collections4.Bag;
-import org.apache.commons.collections4.bag.TreeBag;
+import java.util.LinkedList;
+import java.util.List;
 
 import utils.IntegerUtils;
 
-// algorithm works for 500, but not 5000 :-(
+/**
+ * Solution is based on the "coin change" problem, see
+ * http://www.algorithmist.com/index.php/Coin_Change
+ * 
+ */
 public class PrimeSummations
 {
 	public static void main(String[] args)
 	{
-		System.out.println("not yet solved!");
-		System.exit(1);
-
-		int number = 2;
-		int actualSummations;
-		int expectedSummations = 500;
+		int possibleCombinations = 0;
+		int number = 9;
 
 		do
 		{
-			number += 1;
-			Set<Bag<Integer>> possibleSummations = getPossibleSummations(number);
-			actualSummations = possibleSummations.size();
+			number++;
+
+			possibleCombinations = countPossibleCombinations(number, getAllPrimesSmallerThan(number), 0);
+
+			System.out.println(getAllPrimesSmallerThan(number));
+
+			System.out.println(number + " => " + possibleCombinations);
+
 		}
-		while (actualSummations < expectedSummations);
+		while (possibleCombinations < 5000);
 
 		System.out.println(number);
 	}
 
 
 
-	private static Set<Bag<Integer>> getPossibleSummations(int number)
+	private static int countPossibleCombinations(int number, List<Integer> summands, int checkFromIndex)
 	{
-		Set<Bag<Integer>> result = new LinkedHashSet<Bag<Integer>>();
-
-		for (int i = number; i > 1; i--)
+		if (number == 0)
+			return 1;
+		else if (number < 0 || summands.size() == checkFromIndex)
+			return 0;
+		else
 		{
-			if (IntegerUtils.isPrim(i))
+			int withFirstSummand = countPossibleCombinations(number - summands.get(checkFromIndex), summands, checkFromIndex);
+			int withoutFirstSummand = countPossibleCombinations(number, summands, checkFromIndex + 1);
+			return withFirstSummand + withoutFirstSummand;
+		}
+	}
+
+
+
+	private static List<Integer> getAllPrimesSmallerThan(int number)
+	{
+		List<Integer> primes = new LinkedList<Integer>();
+
+		if (number >= 2)
+		{
+			primes.add(2);
+			for (int i = 3; i <= number; i += 2)
 			{
-				int rest = number - i;
-				if (rest == 0)
+				if (IntegerUtils.isPrim(i))
 				{
-					Bag<Integer> sublist = new TreeBag<Integer>();
-					sublist.add(i);
-					result.add(sublist);
-				}
-				else if (rest > 1)
-				{
-					for (Bag<Integer> subList : getPossibleSummations(rest))
-					{
-						subList.add(i);
-						result.add(subList);
-					}
+					primes.add(i);
 				}
 			}
 		}
 
-		return result;
+		return primes;
 	}
-
 }
