@@ -20,13 +20,7 @@ public class PrimeSummations
 		do
 		{
 			number++;
-
-			possibleCombinations = countPossibleCombinations(number, getAllPrimesSmallerThan(number), 0);
-
-			System.out.println(getAllPrimesSmallerThan(number));
-
-			System.out.println(number + " => " + possibleCombinations);
-
+			possibleCombinations = countPossibleCombinations(number, getAllPrimesSmallerThan(number));
 		}
 		while (possibleCombinations < 5000);
 
@@ -35,18 +29,30 @@ public class PrimeSummations
 
 
 
-	private static int countPossibleCombinations(int number, List<Integer> summands, int checkFromIndex)
+	private static int countPossibleCombinations(int number, List<Integer> summands)
 	{
 		if (number == 0)
 			return 1;
-		else if (number < 0 || summands.size() == checkFromIndex)
+		else if (number < 0 || summands.isEmpty())
 			return 0;
 		else
 		{
-			int withFirstSummand = countPossibleCombinations(number - summands.get(checkFromIndex), summands, checkFromIndex);
-			int withoutFirstSummand = countPossibleCombinations(number, summands, checkFromIndex + 1);
+			int withFirstSummand = countPossibleCombinations(number - summands.get(0), summands);
+			int withoutFirstSummand = countPossibleCombinations(number, createCopyWithoutFirstElement(summands));
 			return withFirstSummand + withoutFirstSummand;
 		}
+	}
+
+
+
+	private static List<Integer> createCopyWithoutFirstElement(List<Integer> original)
+	{
+		List<Integer> copy = new LinkedList<Integer>();
+		for (int i = 1; i < original.size(); i++)
+		{
+			copy.add(original.get(i));
+		}
+		return copy;
 	}
 
 
