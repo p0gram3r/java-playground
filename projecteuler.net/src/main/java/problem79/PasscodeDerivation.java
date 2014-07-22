@@ -1,7 +1,6 @@
 package problem79;
 
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -24,12 +23,24 @@ public class PasscodeDerivation
 		usedCharacters.addAll(occIndex0);
 		usedCharacters.addAll(occIndex1);
 		usedCharacters.addAll(occIndex2);
-	
+		System.out.println(usedCharacters);
+
 		Set<Character> firstChars = new HashSet<Character>();
-		for(char c : usedCharacters)
+		Set<Character> lastChars = new HashSet<Character>();
+		for (char c : usedCharacters)
 		{
-			if (oc)
+			if (occIndex0.contains(c) && !occIndex1.contains(c) && !occIndex2.contains(c))
+			{
+				firstChars.add(c);
+			}
+			else if (!occIndex0.contains(c) && !occIndex1.contains(c) && occIndex2.contains(c))
+			{
+				lastChars.add(c);
+			}
 		}
+
+		System.out.println(firstChars);
+		System.out.println(lastChars);
 
 	}
 
