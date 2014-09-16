@@ -1,47 +1,65 @@
 package problem79;
 
 import java.io.InputStream;
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 
 public class PasscodeDerivation
 {
 
 	public static void main(String[] args)
 	{
+		long start = System.currentTimeMillis();
+
 		List<String> keylog = parseKeylog();
 
-		Set<Character> occIndex0 = getOccurences(keylog, 0);
-		Set<Character> occIndex1 = getOccurences(keylog, 1);
-		Set<Character> occIndex2 = getOccurences(keylog, 2);
-
-		Collection<Character> usedCharacters = new HashSet<Character>();
-		usedCharacters.addAll(occIndex0);
-		usedCharacters.addAll(occIndex1);
-		usedCharacters.addAll(occIndex2);
-		System.out.println(usedCharacters);
-
-		Set<Character> firstChars = new HashSet<Character>();
-		Set<Character> lastChars = new HashSet<Character>();
-		for (char c : usedCharacters)
+		for (int i = 1; i < Integer.MAX_VALUE; i++)
 		{
-			if (occIndex0.contains(c) && !occIndex1.contains(c) && !occIndex2.contains(c))
+			String passcode = Integer.toString(i);
+			boolean canGenerateAllTans = true;
+
+			for (String tan : keylog)
 			{
-				firstChars.add(c);
+				canGenerateAllTans &= canGenerateTan(passcode, tan);
+				if (!canGenerateAllTans)
+				{
+					break;
+				}
 			}
-			else if (!occIndex0.contains(c) && !occIndex1.contains(c) && occIndex2.contains(c))
+
+			if (canGenerateAllTans)
 			{
-				lastChars.add(c);
+				System.out.println("possible passcode: " + passcode);
+				break;
 			}
 		}
 
-		System.out.println(firstChars);
-		System.out.println(lastChars);
+		long end = System.currentTimeMillis();
+		System.out.println("duration in ms:" + (end - start));
+		System.out.println("done");
 
+	}
+
+
+
+	static boolean canGenerateTan(String key, String passcode)
+	{
+		String remainingKey = key;
+		char[] passcodeChars = passcode.toCharArray();
+
+		for (int i = 0; i < passcodeChars.length; i++)
+		{
+			int index = remainingKey.indexOf(passcodeChars[i]);
+			if (index == -1)
+			{
+				return false;
+			}
+
+			remainingKey = remainingKey.substring(index + 1);
+		}
+
+		return true;
 	}
 
 
@@ -61,18 +79,4 @@ public class PasscodeDerivation
 		return result;
 	}
 
-
-
-	private static Set<Character> getOccurences(List<String> keylog, int index)
-	{
-		Set<Character> result = new HashSet<Character>();
-
-		for (String s : keylog)
-		{
-			char c = s.charAt(index);
-			result.add(c);
-		}
-
-		return result;
-	}
 }
