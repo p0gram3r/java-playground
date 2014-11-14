@@ -10,22 +10,25 @@ public class ConsecutivePrimeSum
 	// 41 = 2 + 3 + 5 + 7 + 11 + 13
 	public static void main(String[] args)
 	{
+
+		System.out.println(IntegerUtils.isPrim(997661));
+
 		int limit = 1000000;
 
-		// create a list of all primes up to limit
-		List<Integer> primes = createListOfPrimesUpTo(limit);
+		// create a list of all primes up to a specific limit. this should not
+		// be the limit defined above, as in case of 1 million the list would
+		// contain about 78000 prime numbers to check
+		List<Integer> primes = createListOfPrimesUpTo(4000);
 		System.out.println(primes.size() + " prime numbers to check");
 
-		List<Integer> asdf = new LinkedList<Integer>();
+		List<Integer> longestStreak = new LinkedList<Integer>();
 
 		for (int i = 0; i < primes.size() / 2; i += 1)
 		{
-			int sum = primes.get(i);
-
+			int sum = 0;
 			List<Integer> temp = new LinkedList<Integer>();
-			temp.add(primes.get(i));
 
-			for (int j = i + 1; j < primes.size(); j += 1)
+			for (int j = i; j < primes.size(); j += 1)
 			{
 				sum += primes.get(j);
 				temp.add(primes.get(j));
@@ -33,28 +36,26 @@ public class ConsecutivePrimeSum
 				{
 					break;
 				}
-				if (primes.contains(sum))
-				{
-					// System.out.println("   sum: " + sum + " --- " + temp);
 
-					if (asdf.size() < temp.size())
-					{
-						asdf = new LinkedList<Integer>(temp);
-					}
+				if (IntegerUtils.isPrim(sum) && longestStreak.size() < temp.size())
+				{
+					longestStreak = new LinkedList<Integer>(temp);
 				}
 
 			}
 		}
-		System.out.println();
-		System.out.println();
-		System.out.println(asdf);
 
 		int sum = 0;
-		for (int i : asdf)
+		for (int i : longestStreak)
 		{
 			sum += i;
 		}
-		System.out.println(" ==> " + sum);
+		System.out.println();
+		System.out.println();
+		System.out.println("sum: " + sum);
+		System.out.println("  #: " + longestStreak.size());
+		System.out.println();
+		System.out.println(longestStreak);
 	}
 
 
