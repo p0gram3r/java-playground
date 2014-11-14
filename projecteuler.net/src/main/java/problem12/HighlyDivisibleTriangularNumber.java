@@ -1,4 +1,4 @@
-package probelm12;
+package problem12;
 
 import java.util.Collection;
 
