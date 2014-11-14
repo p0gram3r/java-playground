@@ -10,16 +10,15 @@ public class ConsecutivePrimeSum
 	// 41 = 2 + 3 + 5 + 7 + 11 + 13
 	public static void main(String[] args)
 	{
-		int limit = 100;
+		int limit = 1000000;
 
 		// create a list of all primes up to limit
 		List<Integer> primes = createListOfPrimesUpTo(limit);
-
-		System.out.println(primes);
+		System.out.println(primes.size() + " prime numbers to check");
 
 		List<Integer> asdf = new LinkedList<Integer>();
 
-		for (int i = 0; i < primes.size(); i += 1)
+		for (int i = 0; i < primes.size() / 2; i += 1)
 		{
 			int sum = primes.get(i);
 
@@ -30,9 +29,13 @@ public class ConsecutivePrimeSum
 			{
 				sum += primes.get(j);
 				temp.add(primes.get(j));
+				if (sum > limit)
+				{
+					break;
+				}
 				if (primes.contains(sum))
 				{
-					System.out.println("   sum: " + sum + " --- " + temp);
+					// System.out.println("   sum: " + sum + " --- " + temp);
 
 					if (asdf.size() < temp.size())
 					{
