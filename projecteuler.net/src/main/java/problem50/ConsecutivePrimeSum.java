@@ -10,9 +10,6 @@ public class ConsecutivePrimeSum
 	// 41 = 2 + 3 + 5 + 7 + 11 + 13
 	public static void main(String[] args)
 	{
-
-		System.out.println(IntegerUtils.isPrim(997661));
-
 		int limit = 1000000;
 
 		// create a list of all primes up to a specific limit. this should not
