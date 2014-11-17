@@ -1,18 +1,17 @@
-package problem59;
+package problem059;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.io.PrintStream;
 import java.util.Scanner;
 
 public class XorDecryption
 {
 	public static void main(String[] args) throws FileNotFoundException
 	{
-		PrintStream target = new PrintStream(new File("problem59_output.txt"));
+		// PrintStream target = new PrintStream(new
+		// File("problem59_output.txt"));
 
-		String[] commonWords = { "of", "the" };
+		// String[] commonWords = { "of", "the" };
 		int[] message = getEncryptedMessage();
 
 		// char key_char_start = 'a';
@@ -70,18 +69,6 @@ public class XorDecryption
 		}
 
 		return result;
-	}
-
-
-
-	private static String convertToString(int[] array)
-	{
-		StringBuilder sb = new StringBuilder();
-		for (int i : array)
-		{
-			sb.append((char) i);
-		}
-		return sb.toString();
 	}
 
 

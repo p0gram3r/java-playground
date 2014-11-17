@@ -1,4 +1,4 @@
-package problem02;
+package problem002;
 
 public class EvenFibonacciNumbers
 {

@@ -1,8 +1,10 @@
-package problem79;
+package problem079;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+
+import problem079.PasscodeDerivation;
 
 public class PasscodeDerivationTest
 {

@@ -1,4 +1,4 @@
-package problem79;
+package problem079;
 
 import java.io.InputStream;
 import java.util.LinkedList;
