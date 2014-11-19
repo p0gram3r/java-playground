@@ -2,14 +2,5 @@ package ae.test;
 
 public class HelloDropwizard
 {
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
+    public final String greeting = "Hello World!";
 }
