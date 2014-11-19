@@ -1,4 +1,4 @@
-package ae.test;
+package ae.test.dropwizard;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

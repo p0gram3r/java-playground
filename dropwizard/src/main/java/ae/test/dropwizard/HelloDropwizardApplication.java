@@ -1,4 +1,4 @@
-package ae.test;
+package ae.test.dropwizard;
 
 import io.dropwizard.Application;
 import io.dropwizard.Configuration;

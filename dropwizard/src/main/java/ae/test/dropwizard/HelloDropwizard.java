@@ -1,4 +1,4 @@
-package ae.test;
+package ae.test.dropwizard;
 
 public class HelloDropwizard
 {
