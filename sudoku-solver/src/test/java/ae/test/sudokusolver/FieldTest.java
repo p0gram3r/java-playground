@@ -27,4 +27,17 @@ public class FieldTest {
         assertThat(field.getPossibleValues(), hasSize(1));
         assertThat(field.getPossibleValues(), contains(5));
     }
+
+    @Test
+    public void testRemovePossibility() {
+        Field field = new Field();
+
+        assertThat(field.getPossibleValues(), contains(1, 2, 3, 4, 5, 6, 7, 8, 9));
+
+        field.removePossibility(5);
+        assertThat(field.getPossibleValues(), contains(1, 2, 3, 4, 6, 7, 8, 9));
+
+        field.removePossibility(5);
+        assertThat(field.getPossibleValues(), contains(1, 2, 3, 4, 6, 7, 8, 9));
+    }
 }
