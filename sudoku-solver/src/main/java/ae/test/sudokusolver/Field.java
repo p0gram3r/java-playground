@@ -14,6 +14,10 @@ public class Field {
         }
     }
 
+    public Field(int value) {
+        setValue(value);
+    }
+
     public Integer getValue() {
         return value;
     }
