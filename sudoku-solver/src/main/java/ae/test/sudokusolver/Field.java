@@ -32,4 +32,9 @@ public class Field {
     public void removePossibility(int possibility) {
         possibleValues.remove(possibility);
     }
+
+    @Override
+    public String toString() {
+        return (value == null ? "_" : String.valueOf(value));
+    }
 }
