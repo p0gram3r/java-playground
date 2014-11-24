@@ -50,6 +50,7 @@ public class Puzzle {
         return sb.toString();
     }
 
+    // TODO find faster implementation
     public boolean isSolved() {
         for (int i = 0; i < 9; i += 1) {
             for (int j = 0; j < 9; j += 1) {
