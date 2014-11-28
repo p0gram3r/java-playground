@@ -2,29 +2,6 @@ package ae.test.sudokusolver;
 
 public class Sudoku {
 
-    public static class SudokuBuilder {
-        private Field[][] fields;
-
-        public SudokuBuilder(int dimension) {
-            // TODO add checks
-            this.fields = new Field[dimension][dimension];
-            for (int i = 0; i < 9; i += 1) {
-                for (int j = 0; j < 9; j += 1) {
-                    fields[i][j] = new Field();
-                }
-            }
-        }
-
-        public SudokuBuilder initField(int x, int y, int value) {
-            fields[x][y].setValue(value);
-            return this;
-        }
-
-        public Sudoku build() {
-            return new Sudoku(fields);
-        }
-    }
-
     private Field[][] fields;
 
     public Sudoku(Field[][] fields) {
