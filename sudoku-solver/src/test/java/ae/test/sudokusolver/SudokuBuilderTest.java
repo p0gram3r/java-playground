@@ -41,4 +41,14 @@ public class SudokuBuilderTest {
     public void initFieldRejectsNegativeYCoordinate() {
         builder.initField(0, -5, 1);
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void initFieldRejectsNegativeValue() {
+        builder.initField(0, 0, -1);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void initFieldRejectsInvalidValue() {
+        builder.initField(0, 0, DIMENSION + 1);
+    }
 }
