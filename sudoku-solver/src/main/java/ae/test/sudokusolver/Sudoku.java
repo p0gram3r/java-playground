@@ -1,20 +1,20 @@
 package ae.test.sudokusolver;
 
-public class Puzzle {
+public class Sudoku {
 
-    public static class PuzzleBuilder {
-        private Puzzle puzzle;
+    public static class SudokuBuilder {
+        private Sudoku puzzle;
 
-        public PuzzleBuilder() {
-            puzzle = new Puzzle();
+        public SudokuBuilder() {
+            puzzle = new Sudoku();
         }
 
-        public PuzzleBuilder initField(int x, int y, int value) {
+        public SudokuBuilder initField(int x, int y, int value) {
             puzzle.fields[x][y].setValue(value);
             return this;
         }
 
-        public Puzzle buildPuzzle() {
+        public Sudoku buildPuzzle() {
             // TODO return new instance
             return puzzle;
         }
@@ -22,7 +22,7 @@ public class Puzzle {
 
     private Field[][] fields;
 
-    public Puzzle() {
+    public Sudoku() {
         fields = new Field[9][9];
 
         for (int i = 0; i < 9; i += 1) {
