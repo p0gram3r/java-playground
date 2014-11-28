@@ -1,6 +1,5 @@
 package ae.test.sudokusolver;
 
-
 public class SudokuSolverMain {
 
     public static void main(String[] args) {
@@ -48,6 +47,15 @@ public class SudokuSolverMain {
 
         Sudoku puzzle = builder.build();
         System.out.println(puzzle);
+
+        System.out.println();
+        System.out.println(puzzle.getRow(1));
+
+        System.out.println();
+        System.out.println(puzzle.getColumn(0));
+
+        System.out.println();
+        System.out.println(puzzle.getBox(8, 8));
     }
 
 }
