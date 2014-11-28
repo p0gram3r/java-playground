@@ -16,7 +16,10 @@ public class SudokuBuilder {
 
     public SudokuBuilder initField(int x, int y, int value) {
         if (x < 0 || x >= dimension || y < 0 || y >= dimension) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("invalid coordinates");
+        }
+        if (value < 1 || value > dimension) {
+            throw new IllegalArgumentException("invalid value");
         }
         fields[x][y].setValue(value);
         return this;
