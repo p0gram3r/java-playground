@@ -34,7 +34,7 @@ public class Puzzle {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (int y = 8; y >= 0; y -= 1) {
+        for (int y = 0; y < 9; y += 1) {
             for (int x = 0; x < 9; x += 1) {
                 sb.append(fields[x][y]);
                 sb.append(" ");
@@ -42,7 +42,7 @@ public class Puzzle {
                     sb.append(" ");
                 }
             }
-            if (y % 3 == 0) {
+            if (y % 3 == 2) {
                 sb.append("\n");
             }
             sb.append("\n");
