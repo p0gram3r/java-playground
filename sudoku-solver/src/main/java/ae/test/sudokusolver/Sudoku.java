@@ -3,33 +3,32 @@ package ae.test.sudokusolver;
 public class Sudoku {
 
     public static class SudokuBuilder {
-        private Sudoku puzzle;
+        private Field[][] fields;
 
-        public SudokuBuilder() {
-            puzzle = new Sudoku();
+        public SudokuBuilder(int dimension) {
+            // TODO add checks
+            this.fields = new Field[dimension][dimension];
+            for (int i = 0; i < 9; i += 1) {
+                for (int j = 0; j < 9; j += 1) {
+                    fields[i][j] = new Field();
+                }
+            }
         }
 
         public SudokuBuilder initField(int x, int y, int value) {
-            puzzle.fields[x][y].setValue(value);
+            fields[x][y].setValue(value);
             return this;
         }
 
-        public Sudoku buildPuzzle() {
-            // TODO return new instance
-            return puzzle;
+        public Sudoku build() {
+            return new Sudoku(fields);
         }
     }
 
     private Field[][] fields;
 
-    public Sudoku() {
-        fields = new Field[9][9];
-
-        for (int i = 0; i < 9; i += 1) {
-            for (int j = 0; j < 9; j += 1) {
-                fields[i][j] = new Field();
-            }
-        }
+    public Sudoku(Field[][] fields) {
+        this.fields = fields;
     }
 
     public String toString() {

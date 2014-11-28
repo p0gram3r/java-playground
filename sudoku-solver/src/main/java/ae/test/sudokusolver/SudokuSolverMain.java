@@ -5,7 +5,7 @@ import ae.test.sudokusolver.Sudoku.SudokuBuilder;
 public class SudokuSolverMain {
 
     public static void main(String[] args) {
-        SudokuBuilder builder = new SudokuBuilder();
+        SudokuBuilder builder = new SudokuBuilder(9);
 
         // upper left
         builder.initField(0, 0, 6);
@@ -47,7 +47,7 @@ public class SudokuSolverMain {
         builder.initField(6, 6, 2);
         builder.initField(8, 8, 9);
 
-        Sudoku puzzle = builder.buildPuzzle();
+        Sudoku puzzle = builder.build();
         System.out.println(puzzle);
     }
 
