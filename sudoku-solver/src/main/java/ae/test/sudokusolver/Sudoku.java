@@ -6,22 +6,26 @@ import java.util.List;
 public class Sudoku {
 
     private Field[][] fields;
+    private int dimension;
+    private int boxDimension;
 
     public Sudoku(Field[][] fields) {
         this.fields = fields;
+        this.dimension = fields.length;
+        this.boxDimension = (int) Math.sqrt(dimension);
     }
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (int y = 0; y < 9; y += 1) {
-            for (int x = 0; x < 9; x += 1) {
+        for (int y = 0; y < getDimension(); y += 1) {
+            for (int x = 0; x < getDimension(); x += 1) {
                 sb.append(fields[x][y]);
                 sb.append(" ");
-                if (x % 3 == 2) {
+                if (x % boxDimension == (boxDimension - 1)) {
                     sb.append(" ");
                 }
             }
-            if (y % 3 == 2) {
+            if (y % boxDimension == (boxDimension - 1)) {
                 sb.append("\n");
             }
             sb.append("\n");
@@ -35,29 +39,28 @@ public class Sudoku {
 
     // TODO create and return separate object?
     public List<Field> getRow(int y) {
-        List<Field> row = new ArrayList<Field>(fields.length);
-        for (int x = 0; x < fields.length; x += 1) {
+        List<Field> row = new ArrayList<Field>(getDimension());
+        for (int x = 0; x < getDimension(); x += 1) {
             row.add(getField(x, y));
         }
         return row;
     }
 
     public List<Field> getColumn(int x) {
-        List<Field> column = new ArrayList<Field>(fields.length);
-        for (int y = 0; y < fields.length; y += 1) {
+        List<Field> column = new ArrayList<Field>(getDimension());
+        for (int y = 0; y < getDimension(); y += 1) {
             column.add(getField(x, y));
         }
         return column;
     }
 
     public List<Field> getBox(int x, int y) {
-        // FIXME this should not be hardcoded
-        int boxRowOffset = (x / 3) * 3;
-        int boxColOffset = (y / 3) * 3;
+        int boxRowOffset = (x / boxDimension) * boxDimension;
+        int boxColOffset = (y / boxDimension) * boxDimension;
 
-        List<Field> box = new ArrayList<Field>(fields.length);
-        for (int i = 0; i < 3; i += 1) {
-            for (int j = 0; j < 3; j += 1) {
+        List<Field> box = new ArrayList<Field>(getDimension());
+        for (int i = 0; i < boxDimension; i += 1) {
+            for (int j = 0; j < boxDimension; j += 1) {
                 box.add(getField(boxRowOffset + i, boxColOffset + j));
             }
         }
@@ -66,6 +69,6 @@ public class Sudoku {
 
     // TODO keep this method? how to initialize value?
     public int getDimension() {
-        return 9;
+        return fields.length;
     }
 }
