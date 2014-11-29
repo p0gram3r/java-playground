@@ -67,8 +67,11 @@ public class Sudoku {
         return box;
     }
 
-    // TODO keep this method? how to initialize value?
     public int getDimension() {
-        return fields.length;
+        return dimension;
+    }
+
+    public int getBoxDimension() {
+        return boxDimension;
     }
 }
