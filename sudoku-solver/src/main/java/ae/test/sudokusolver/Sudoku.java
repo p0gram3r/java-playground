@@ -29,18 +29,6 @@ public class Sudoku {
         return sb.toString();
     }
 
-    // TODO find faster and correct implementation
-    public boolean isSolved() {
-        for (int i = 0; i < 9; i += 1) {
-            for (int j = 0; j < 9; j += 1) {
-                if (fields[i][j].getValue() == null) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
     public Field getField(int x, int y) {
         return fields[x][y];
     }
@@ -74,5 +62,10 @@ public class Sudoku {
             }
         }
         return box;
+    }
+
+    // TODO keep this method? how to initialize value?
+    public int getDimension() {
+        return 9;
     }
 }
