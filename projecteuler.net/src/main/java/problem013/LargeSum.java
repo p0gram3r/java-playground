@@ -1,4 +1,4 @@
-package problem013;
+package problem;
 
 import java.io.InputStream;
 import java.math.BigInteger;

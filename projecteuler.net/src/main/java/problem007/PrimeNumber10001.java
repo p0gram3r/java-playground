@@ -1,4 +1,4 @@
-package problem007;
+package problem;
 
 import utils.IntegerUtils;
 
