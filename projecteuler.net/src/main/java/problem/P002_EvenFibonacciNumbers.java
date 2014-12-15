@@ -1,6 +1,6 @@
 package problem;
 
-public class EvenFibonacciNumbers implements Problem {
+public class P002_EvenFibonacciNumbers implements Problem {
 
     public Object getSolution() {
         int limit = 4000000;
