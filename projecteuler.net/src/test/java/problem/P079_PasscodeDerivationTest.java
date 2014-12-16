@@ -1,12 +1,12 @@
-package problem079;
+package problem;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import problem079.P079_PasscodeDerivation;
+import problem.P079_PasscodeDerivation;
 
-public class PasscodeDerivationTest
+public class P079_PasscodeDerivationTest
 {
 	// TODO migrate to parameterized test
 
