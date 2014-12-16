@@ -1,10 +1,10 @@
-package problem;
+package problem049;
 
 import java.util.Collection;
 
 import utils.IntegerUtils;
 
-public class PrimePermutations
+public class P049_PrimePermutations
 {
 
 	// The arithmetic sequence, 1487, 4817, 8147, in which each of the terms

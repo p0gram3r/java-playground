@@ -1,10 +1,10 @@
-package problem;
+package problem052;
 
 import java.util.Collection;
 
 import utils.IntegerUtils;
 
-public class PermutedMultiples
+public class P052_PermutedMultiples
 {
 	public static void main(String[] args)
 	{

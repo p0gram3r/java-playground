@@ -1,16 +1,16 @@
-package problem;
+package problem013;
 
 import java.io.InputStream;
 import java.math.BigInteger;
 import java.util.Scanner;
 
-public class LargeSum
+public class P013_LargeSum
 {
 	public static void main(String[] args)
 	{
 		BigInteger sum = BigInteger.ZERO;
 
-		InputStream inStream = LargeSum.class.getClassLoader().getResourceAsStream("problem13.txt");
+		InputStream inStream = P013_LargeSum.class.getClassLoader().getResourceAsStream("problem13.txt");
 		Scanner scanner = new Scanner(inStream);
 
 		while (scanner.hasNext())

@@ -1,8 +1,8 @@
-package problem;
+package problem016;
 
 import java.math.BigInteger;
 
-public class PowerDigitSum
+public class P016_PowerDigitSum
 {
 
 	public static void main(String[] args)

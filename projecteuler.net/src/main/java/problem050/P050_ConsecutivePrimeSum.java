@@ -1,11 +1,11 @@
-package problem;
+package problem050;
 
 import java.util.LinkedList;
 import java.util.List;
 
 import utils.IntegerUtils;
 
-public class ConsecutivePrimeSum
+public class P050_ConsecutivePrimeSum
 {
 	// 41 = 2 + 3 + 5 + 7 + 11 + 13
 	public static void main(String[] args)

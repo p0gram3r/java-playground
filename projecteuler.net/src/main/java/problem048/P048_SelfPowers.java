@@ -1,8 +1,8 @@
-package problem;
+package problem048;
 
 import java.math.BigInteger;
 
-public class SelfPowers
+public class P048_SelfPowers
 {
 
 	public static void main(String[] args)
