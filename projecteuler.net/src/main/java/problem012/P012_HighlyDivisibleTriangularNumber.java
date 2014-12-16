@@ -1,10 +1,10 @@
-package problem;
+package problem012;
 
 import java.util.Collection;
 
 import utils.LongUtils;
 
-public class HighlyDivisibleTriangularNumber
+public class P012_HighlyDivisibleTriangularNumber
 {
 	public static void main(String[] args)
 	{
