@@ -1,9 +1,8 @@
-package problem077;
+package problem;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import problem.Problem;
 import utils.IntegerUtils;
 
 /**

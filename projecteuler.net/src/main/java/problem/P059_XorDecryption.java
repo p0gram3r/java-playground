@@ -1,11 +1,11 @@
-package problem059;
+package problem;
 
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Scanner;
 
-public class P059_XorDecryption {
-    public static void main(String[] args) throws FileNotFoundException {
+public class P059_XorDecryption implements Problem {
+
+    public Object getSolution() {
         // PrintStream target = new PrintStream(new
         // File("problem59_output.txt"));
 
@@ -45,7 +45,8 @@ public class P059_XorDecryption {
         for (int i : decrytptedText) {
             sum += i;
         }
-        System.out.println(sum);
+
+        return sum;
     }
 
     private static int[] getEncryptedMessage() {
