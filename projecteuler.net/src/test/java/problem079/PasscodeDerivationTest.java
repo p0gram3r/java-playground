@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import problem079.PasscodeDerivation;
+import problem079.P079_PasscodeDerivation;
 
 public class PasscodeDerivationTest
 {
@@ -27,6 +27,6 @@ public class PasscodeDerivationTest
 
 	private void runTest(String passcode, String tan, boolean expectedResult)
 	{
-		assertEquals(expectedResult, PasscodeDerivation.canGenerateTan(passcode, tan));
+		assertEquals(expectedResult, P079_PasscodeDerivation.canGenerateTan(passcode, tan));
 	}
 }
