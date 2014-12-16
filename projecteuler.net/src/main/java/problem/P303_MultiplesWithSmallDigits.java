@@ -16,8 +16,7 @@ public class P303_MultiplesWithSmallDigits implements Problem {
 
     @Override
     public Object getSolution() {
-        // TODO Auto-generated method stub
-        return null;
+        return sumFunctionQuotients(10);
     }
 
     /**
@@ -27,7 +26,7 @@ public class P303_MultiplesWithSmallDigits implements Problem {
      * @param n
      * @return
      */
-    public BigInteger f(int n) {
+    protected BigInteger f(int n) {
         String regex = "^[012]*$";
         BigInteger multiple;
 
@@ -42,4 +41,20 @@ public class P303_MultiplesWithSmallDigits implements Problem {
 
         return multiple;
     }
+
+    protected BigInteger sumFunctionQuotients(int maxN) {
+        BigInteger result = BigInteger.ZERO;
+
+        for (int n = 1; n <= maxN; n += 1) {
+            BigInteger functionResult = f(n);
+            BigInteger nAsBigInt = new BigInteger(Integer.toString(n));
+            BigInteger quot = functionResult.divide(nAsBigInt);
+
+            result = result.add(quot);
+            System.out.println("  f: " + functionResult + "  n: " + nAsBigInt + "   = " + quot + " --> " + result);
+        }
+
+        return result;
+    }
+
 }

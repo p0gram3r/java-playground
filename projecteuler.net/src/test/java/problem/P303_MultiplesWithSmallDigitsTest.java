@@ -17,7 +17,13 @@ public class P303_MultiplesWithSmallDigitsTest {
     }
 
     @Test
+    public void testSumFunctionQuotients() {
+        assertEquals(new BigInteger("11363107"), p.sumFunctionQuotients(100));
+    }
+
+    @Test
     public void testFFunction() {
+        assertFResult(1, 1);
         assertFResult(2, 2);
         assertFResult(3, 12);
         assertFResult(7, 21);
