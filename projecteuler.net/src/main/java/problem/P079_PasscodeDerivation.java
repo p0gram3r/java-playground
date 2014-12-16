@@ -5,8 +5,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
-import problem.Problem;
-
 public class P079_PasscodeDerivation implements Problem {
 
     public Object getSolution() {
@@ -39,7 +37,7 @@ public class P079_PasscodeDerivation implements Problem {
         return result;
     }
 
-    private boolean canGenerateTan(String key, String passcode) {
+    public static boolean canGenerateTan(String key, String passcode) {
         String remainingKey = key;
         char[] passcodeChars = passcode.toCharArray();
 
