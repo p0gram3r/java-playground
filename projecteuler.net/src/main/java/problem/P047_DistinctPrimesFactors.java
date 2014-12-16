@@ -5,9 +5,9 @@ import java.util.TreeSet;
 
 import utils.LongUtils;
 
-public class DistinctPrimesFactors {
+public class P047_DistinctPrimesFactors implements Problem {
 
-    public static void main(String[] args) {
+    public Object getSolution() {
         int LIMIT = 4;
 
         long result = 2;
@@ -23,7 +23,7 @@ public class DistinctPrimesFactors {
             }
         }
 
-        System.out.println(result);
+        return result;
     }
 
     private static Set<Long> uniquePrimeFactors(long number) {
