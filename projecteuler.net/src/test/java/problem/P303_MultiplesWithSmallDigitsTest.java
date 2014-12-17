@@ -1,10 +1,12 @@
 package problem;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.math.BigInteger;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class P303_MultiplesWithSmallDigitsTest {
@@ -17,10 +19,18 @@ public class P303_MultiplesWithSmallDigitsTest {
     }
 
     @Test
+    public void testAsdf() {
+        System.out.println(p.getFactorForF(99));
+        fail();
+    }
+
+    @Ignore
+    @Test
     public void testSumFunctionQuotients() {
         assertEquals(new BigInteger("11363107"), p.sumFunctionQuotients(100));
     }
 
+    @Ignore
     @Test
     public void testFFunction() {
         assertFResult(1, 1);

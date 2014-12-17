@@ -14,10 +14,51 @@ import java.math.BigInteger;
  */
 public class P303_MultiplesWithSmallDigits implements Problem {
 
+    private static String F_REGEX = "^[012]*$";
+
     @Override
     public Object getSolution() {
         return sumFunctionQuotients(10);
     }
+
+    /**
+     * Returns the factor x so that f(n) = n * x returns a number only using digits ≤ 2
+     * 
+     * @param n
+     * @return
+     */
+    protected BigInteger getFactorForF(int n) {
+        BigInteger nAsBigInt = new BigInteger(Integer.toString(n));
+        BigInteger factor = null;
+
+        for (int i = 1;;) {
+            nAsBigInt = new BigInteger(Integer.toString(n));
+            factor = new BigInteger(Integer.toString(i));
+
+            BigInteger multiple = nAsBigInt.multiply(factor);
+            if (multiple.toString().matches(F_REGEX)) {
+                break;
+            }
+
+            if (n % 10 == 9) {
+                if (i % 10 == 0) {
+                    i += 8;
+                }
+                else {
+                    i += 1;
+                }
+            }
+            else {
+                i += 1;
+            }
+        }
+
+        return factor;
+    }
+
+    // ///
+    // old and slow implementation
+    // ///
 
     /**
      * For a positive integer n, define f(n) as the least positive multiple of n that, written in base 10, uses only digits ≤
@@ -27,14 +68,13 @@ public class P303_MultiplesWithSmallDigits implements Problem {
      * @return
      */
     protected BigInteger f(int n) {
-        String regex = "^[012]*$";
         BigInteger multiple;
 
         for (int i = 1;; i += 1) {
             multiple = new BigInteger(Integer.toString(n));
             multiple = multiple.multiply(new BigInteger(Integer.toString(i)));
 
-            if (multiple.toString().matches(regex)) {
+            if (multiple.toString().matches(F_REGEX)) {
                 break;
             }
         }
@@ -46,12 +86,14 @@ public class P303_MultiplesWithSmallDigits implements Problem {
         BigInteger result = BigInteger.ZERO;
 
         for (int n = 1; n <= maxN; n += 1) {
-            BigInteger functionResult = f(n);
-            BigInteger nAsBigInt = new BigInteger(Integer.toString(n));
-            BigInteger quot = functionResult.divide(nAsBigInt);
+            // BigInteger functionResult = f(n);
+            // BigInteger nAsBigInt = new BigInteger(Integer.toString(n));
+            // BigInteger quot = functionResult.divide(nAsBigInt);
+            //
+            // result = result.add(quot);
+            // System.out.println("  f: " + functionResult + "  n: " + nAsBigInt + "   = " + quot + " --> " + result);
 
-            result = result.add(quot);
-            System.out.println("  f: " + functionResult + "  n: " + nAsBigInt + "   = " + quot + " --> " + result);
+            result = result.add(getFactorForF(n));
         }
 
         return result;
