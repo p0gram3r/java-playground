@@ -22,6 +22,7 @@ public class PrepareDownloads {
             }
         }
 
+        System.out.println("Preparing next " + limit + " downloads...");
         dao.markUrlsAsWip(limit);
     }
 }
