@@ -2,4 +2,4 @@
 
 BASEDIR=$(dirname $0)/..
 
-java -cp $BASEDIR/target/*.jar ae/picarchive/ExportDownloadList
+java -cp $BASEDIR/target/pic-archive.jar ae/picarchive/ExportDownloadList
