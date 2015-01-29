@@ -1,25 +1,27 @@
 package ae.picarchive;
 
+import static ae.picarchive.Configuration.DB_PASS;
+import static ae.picarchive.Configuration.DB_URL;
+import static ae.picarchive.Configuration.DB_USER;
+import static ae.picarchive.Configuration.DIR_DOWNLOAD;
+
 import java.util.List;
 
-import org.skife.jdbi.v2.DBI;
-
+import ae.picarchive.dao.DAOFactory;
 import ae.picarchive.dao.UrlDAO;
 import ae.picarchive.entity.Url;
 
 public class ExportDownloadList {
 
-    private static final String DOWNLOAD_DIR = "_downloads";
-
     public static void main(String[] args) {
-        DBI dbi = new DBI("jdbc:hsqldb:hsql://localhost/xdb", "SA", "");
-        UrlDAO dao = dbi.onDemand(UrlDAO.class);
+        DAOFactory daoFactory = new DAOFactory(DB_URL, DB_USER, DB_PASS);
+        UrlDAO dao = daoFactory.getUrlDAO();
 
         // dao.markUrlsAsWip(5);
 
         List<Url> result = dao.getWipUrls();
         for (Url u : result) {
-            System.out.println("wget -O " + DOWNLOAD_DIR + "/" + u.getId() + " " + u.getUrl());
+            System.out.println("wget -O " + DIR_DOWNLOAD + "/" + u.getId() + " " + u.getUrl());
         }
     }
 }
