@@ -11,13 +11,11 @@ import ae.picarchive.dao.DAOFactory;
 import ae.picarchive.dao.UrlDAO;
 import ae.picarchive.entity.Url;
 
-public class ExportDownloadList {
+public class ExportWipUrlsAsWgetDownload {
 
     public static void main(String[] args) {
         DAOFactory daoFactory = new DAOFactory(DB_URL, DB_USER, DB_PASS);
         UrlDAO dao = daoFactory.getUrlDAO();
-
-        // dao.markUrlsAsWip(5);
 
         List<Url> result = dao.getWipUrls();
         for (Url u : result) {
