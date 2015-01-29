@@ -9,3 +9,12 @@ create table urls (
 -    name varchar(35) PRIMARY KEY,
 -    path VARCHAR(500) NOT NULL
 -);
+
+
+--
+-- WIP
+--
+
+update urls 
+set status='WIP' 
+where id in (select id from urls where status = 'NEW' LIMIT 3)
