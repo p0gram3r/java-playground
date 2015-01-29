@@ -39,6 +39,11 @@
 
   <dependencies>
     <dependency>
+      <groupId>ae.jbulkurl</groupId>
+      <artifactId>jbulkurl</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
       <groupId>org.hsqldb</groupId>
       <artifactId>hsqldb</artifactId>
       <version>2.3.2</version>

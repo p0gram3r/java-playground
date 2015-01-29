@@ -12,6 +12,9 @@ import ae.picarchive.entity.UrlMapper;
 
 public interface UrlDAO {
 
+    @SqlUpdate("INSERT INTO urls (url) values (:url)")
+    void storeNewUrl(@Bind("url") String url);
+
     @SqlUpdate("UPDATE urls SET status='WIP' WHERE id IN (SELECT id FROM urls WHERE status = 'NEW' LIMIT :limit)")
     void markUrlsAsWip(@Bind("limit") int limit);
 
