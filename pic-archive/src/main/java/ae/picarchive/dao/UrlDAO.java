@@ -22,4 +22,6 @@ public interface UrlDAO {
     @RegisterMapper(UrlMapper.class)
     List<Url> getWipUrls();
 
+    @SqlUpdate("UPDATE urls SET status='DONE' WHERE id = :id")
+    void markUrlAsDone(@Bind("id") long id);
 }
