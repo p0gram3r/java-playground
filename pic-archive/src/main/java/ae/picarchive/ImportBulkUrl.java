@@ -52,16 +52,12 @@ class StoreUrlInDatabaseHandler implements GeneratedUrlHandler {
 
     @Override
     public void handle(String generatedUrl) {
-        System.out.print(generatedUrl);
-
         try {
             dao.storeNewUrl(generatedUrl);
-            System.out.println(" --> imported");
             successCount++;
         }
         catch (UnableToExecuteStatementException e) {
             if (e.getCause() instanceof SQLIntegrityConstraintViolationException) {
-                System.out.println(" --> skipped (duplicate)");
                 duplicateCount++;
             }
             else {
