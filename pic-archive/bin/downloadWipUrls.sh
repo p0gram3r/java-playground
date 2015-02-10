@@ -2,16 +2,11 @@
 
 BASEDIR=$(dirname $0)/..
 
-TMP_FILE=$BASEDIR/bin/$(date +%s-%N)
+source $BASEDIR/bin/config.sh
 
-echo "exporting urls to temp file $TMP_FILE"
-java -cp $BASEDIR/target/pic-archive.jar ae/picarchive/ExportWipUrlsAsWgetDownload >> $TMP_FILE
 
-echo "changing file permissions"
-chmod ugo+x $TMP_FILE
+echo "start downloading files to ${DOWNLOAD_DIR}"
 
-echo "executing file"
-$TMP_FILE
+java -cp $BASEDIR/target/pic-archive.jar ae/picarchive/ExportWipUrlsAsWgetDownload ${DOWNLOAD_DIR} | /bin/bash
 
-echo "removing temp file"
-rm $TMP_FILE
+echo "finished downloading"
