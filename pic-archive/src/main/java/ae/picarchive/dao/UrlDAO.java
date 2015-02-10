@@ -16,13 +16,16 @@ public interface UrlDAO {
     @SqlUpdate("INSERT INTO urls (url) values (:url)")
     void storeNewUrl(@Bind("url") String url);
 
-    @SqlUpdate("UPDATE urls SET status='WIP' WHERE id IN (SELECT id FROM urls WHERE status = 'NEW' LIMIT :limit)")
+    @SqlUpdate("UPDATE urls SET status = 'WIP' WHERE id IN (SELECT id FROM urls WHERE status = 'NEW' LIMIT :limit)")
     void markUrlsAsWip(@Bind("limit") int limit);
 
     @SqlQuery("SELECT id, url, status FROM urls WHERE status = 'WIP'")
     @RegisterMapper(UrlMapper.class)
     List<Url> getWipUrls();
 
-    @SqlUpdate("UPDATE urls SET status='DONE' WHERE id = :id")
+    @SqlUpdate("UPDATE urls SET status = 'DONE' WHERE id = :id")
     void markUrlAsDone(@BindBean Url url);
+
+    @SqlUpdate("UPDATE urls SET fileId = :fileId WHERE id = :urlId")
+    void linkFileWithUrl(@Bind("urlId") long urlId, @Bind("fileId") long fileId);
 }
