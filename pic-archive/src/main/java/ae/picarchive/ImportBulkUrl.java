@@ -64,5 +64,9 @@ class StoreUrlInDatabaseHandler implements GeneratedUrlHandler {
                 throw e;
             }
         }
+
+        if ((successCount + duplicateCount) % 100 == 0) {
+            System.out.println("new / duplicate urls : " + successCount + " / " + duplicateCount);
+        }
     }
 }
