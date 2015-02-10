@@ -3,7 +3,6 @@ package ae.picarchive.dao;
 import java.util.List;
 
 import org.skife.jdbi.v2.sqlobject.Bind;
-import org.skife.jdbi.v2.sqlobject.BindBean;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
@@ -23,9 +22,6 @@ public interface UrlDAO {
     @RegisterMapper(UrlMapper.class)
     List<Url> getWipUrls();
 
-    @SqlUpdate("UPDATE urls SET status = 'DONE' WHERE id = :id")
-    void markUrlAsDone(@BindBean Url url);
-
-    @SqlUpdate("UPDATE urls SET fileId = :fileId WHERE id = :urlId")
+    @SqlUpdate("UPDATE urls SET fileId = :fileId , status = 'DONE' WHERE id = :urlId")
     void linkFileWithUrl(@Bind("urlId") long urlId, @Bind("fileId") long fileId);
 }

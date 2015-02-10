@@ -27,7 +27,6 @@ public class ExportWipUrlsAsWgetDownload {
         List<Url> result = dao.getWipUrls();
         for (Url u : result) {
             System.out.println("wget -qO " + targetDir + "/" + u.getId() + " " + u.getUrl());
-            dao.markUrlAsDone(u);
         }
     }
 }
