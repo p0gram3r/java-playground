@@ -4,6 +4,7 @@ BASEDIR=$(dirname $0)/..
 
 source $BASEDIR/bin/config.sh
 
+
 TOTAL_FILE_COUNT=$(ls ${DOWNLOAD_DIR}/ | wc -l)
 if [ $TOTAL_FILE_COUNT == 0 ]; then
   echo "No files to process"
