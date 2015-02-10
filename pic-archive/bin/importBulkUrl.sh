@@ -2,4 +2,7 @@
 
 BASEDIR=$(dirname $0)/..
 
-java -cp $BASEDIR/target/pic-archive.jar ae/picarchive/ImportBulkUrl "$@"
+source $BASEDIR/bin/config.sh
+
+
+execJava ImportBulkUrl "$@"

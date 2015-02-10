@@ -2,4 +2,6 @@
 
 BASEDIR=$(dirname $0)/..
 
-java -cp $BASEDIR/target/pic-archive.jar ae/picarchive/PrepareDownloads "$@"
+source $BASEDIR/bin/config.sh
+
+execJava PrepareDownloads "$@"

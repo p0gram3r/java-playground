@@ -37,7 +37,7 @@ for FILE in ${DOWNLOAD_DIR}/*; do
   # register the file with the url
   URL_ID=$(basename "$FILE")
   TARGET_FILE_PATH="${PARENT_DIR}/${HASH}"
-  java -cp $BASEDIR/target/pic-archive.jar ae/picarchive/RegisterFile "$URL_ID" "$TARGET_FILE_PATH"
+  execJava RegisterFile "$URL_ID" "$TARGET_FILE_PATH"
 
   # move the file
   mv "$FILE" "$TARGET_FILE_PATH"
