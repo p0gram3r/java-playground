@@ -23,6 +23,7 @@ for FILE in ${DOWNLOAD_DIR}/*; do
   # filter small and empty files
   FILE_SIZE=$(wc -c "$FILE" | cut -f 1 -d ' ')
   if [ $FILE_SIZE -lt $MINIMUM_FILE_SIZE ]; then
+    echo "removing $FILE (file size < $MINIMUM_FILE_SIZE)"
     rm $FILE
     FILE_COUNT=$(expr $FILE_COUNT + 1)
     continue;
