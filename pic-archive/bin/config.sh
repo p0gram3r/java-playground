@@ -3,6 +3,8 @@
 DOWNLOAD_DIR=/var/p0gram3r/pic-archive/downloads
 ARCHIVE_DIR=/var/p0gram3r/pic-archive/archive
 
+MINIMUM_FILE_SIZE=20000
+
 function execJava() {
 	local CLASS_NAME=$1
 	shift

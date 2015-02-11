@@ -20,6 +20,14 @@ for FILE in ${DOWNLOAD_DIR}/*; do
     continue
   fi
 
+  # filter small and empty files
+  FILE_SIZE=$(wc -c "$FILE" | cut -f 1 -d ' ')
+  if [ $FILE_SIZE -lt $MINIMUM_FILE_SIZE ]; then
+    rm $FILE
+    FILE_COUNT=$(expr $FILE_COUNT + 1)
+    continue;
+  fi
+
   # the MD5 hash is the basis fordetermines the target directory
   HASH=($(md5sum $FILE))
 
