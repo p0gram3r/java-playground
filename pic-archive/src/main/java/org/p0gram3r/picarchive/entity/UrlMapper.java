@@ -1,4 +1,4 @@
-package ae.picarchive.entity;
+package org.p0gram3r.picarchive.entity;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

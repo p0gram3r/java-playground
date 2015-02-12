@@ -1,4 +1,4 @@
-package ae.picarchive.dao;
+package org.p0gram3r.picarchive.dao;
 
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;

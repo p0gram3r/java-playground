@@ -9,7 +9,7 @@ function execJava() {
 	local CLASS_NAME=$1
 	shift
 
-	java -cp $BASEDIR/target/pic-archive.jar ae/picarchive/${CLASS_NAME} "$@"
+	java -cp $BASEDIR/target/pic-archive.jar org/p0gram3r/picarchive/${CLASS_NAME} "$@"
 
 	EXIT_STATUS=$?
 	if [ "$EXIT_STATUS" -ne "0" ]; then

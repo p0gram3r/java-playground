@@ -1,14 +1,14 @@
-package ae.picarchive;
+package org.p0gram3r.picarchive;
 
-import static ae.picarchive.Configuration.DB_PASS;
-import static ae.picarchive.Configuration.DB_URL;
-import static ae.picarchive.Configuration.DB_USER;
+import static org.p0gram3r.picarchive.Configuration.DB_PASS;
+import static org.p0gram3r.picarchive.Configuration.DB_URL;
+import static org.p0gram3r.picarchive.Configuration.DB_USER;
 
 import java.util.List;
 
-import ae.picarchive.dao.DAOFactory;
-import ae.picarchive.dao.UrlDAO;
-import ae.picarchive.entity.Url;
+import org.p0gram3r.picarchive.dao.DAOFactory;
+import org.p0gram3r.picarchive.dao.UrlDAO;
+import org.p0gram3r.picarchive.entity.Url;
 
 public class ExportWipUrlsAsWgetDownload {
 

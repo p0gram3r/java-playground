@@ -1,10 +1,11 @@
-package ae.picarchive;
+package org.p0gram3r.picarchive;
 
-import static ae.picarchive.Configuration.DB_PASS;
-import static ae.picarchive.Configuration.DB_URL;
-import static ae.picarchive.Configuration.DB_USER;
-import ae.picarchive.dao.DAOFactory;
-import ae.picarchive.dao.UrlDAO;
+import static org.p0gram3r.picarchive.Configuration.DB_PASS;
+import static org.p0gram3r.picarchive.Configuration.DB_URL;
+import static org.p0gram3r.picarchive.Configuration.DB_USER;
+
+import org.p0gram3r.picarchive.dao.DAOFactory;
+import org.p0gram3r.picarchive.dao.UrlDAO;
 
 public class PrepareDownloads {
 

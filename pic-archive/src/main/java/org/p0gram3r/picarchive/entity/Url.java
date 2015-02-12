@@ -1,4 +1,4 @@
-package ae.picarchive.entity;
+package org.p0gram3r.picarchive.entity;
 
 // TODO make immutable?
 public class Url {

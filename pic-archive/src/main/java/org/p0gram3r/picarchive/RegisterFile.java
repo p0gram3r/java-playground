@@ -1,16 +1,15 @@
-package ae.picarchive;
+package org.p0gram3r.picarchive;
 
-import static ae.picarchive.Configuration.DB_PASS;
-import static ae.picarchive.Configuration.DB_URL;
-import static ae.picarchive.Configuration.DB_USER;
+import static org.p0gram3r.picarchive.Configuration.DB_PASS;
+import static org.p0gram3r.picarchive.Configuration.DB_URL;
+import static org.p0gram3r.picarchive.Configuration.DB_USER;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 
+import org.p0gram3r.picarchive.dao.DAOFactory;
+import org.p0gram3r.picarchive.dao.FileDAO;
+import org.p0gram3r.picarchive.dao.UrlDAO;
 import org.skife.jdbi.v2.exceptions.UnableToExecuteStatementException;
-
-import ae.picarchive.dao.DAOFactory;
-import ae.picarchive.dao.FileDAO;
-import ae.picarchive.dao.UrlDAO;
 
 public class RegisterFile {
 

@@ -1,14 +1,13 @@
-package ae.picarchive.dao;
+package org.p0gram3r.picarchive.dao;
 
 import java.util.List;
 
+import org.p0gram3r.picarchive.entity.Url;
+import org.p0gram3r.picarchive.entity.UrlMapper;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
-
-import ae.picarchive.entity.Url;
-import ae.picarchive.entity.UrlMapper;
 
 public interface UrlDAO {
 

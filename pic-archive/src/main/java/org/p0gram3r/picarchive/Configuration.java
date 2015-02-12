@@ -1,4 +1,4 @@
-package ae.picarchive;
+package org.p0gram3r.picarchive;
 
 public class Configuration {
 
