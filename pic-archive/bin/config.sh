@@ -1,7 +1,7 @@
 #!/bin/bash
 
-DOWNLOAD_DIR=/var/p0gram3r/pic-archive/downloads
-ARCHIVE_DIR=/var/p0gram3r/pic-archive/archive
+DOWNLOAD_DIR=/opt/p0gram3r/pic-archive/downloads
+ARCHIVE_DIR=/opt/p0gram3r/pic-archive/archive
 
 MINIMUM_FILE_SIZE=20000
 
