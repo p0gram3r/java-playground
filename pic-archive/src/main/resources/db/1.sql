@@ -1,5 +1,6 @@
 CREATE TABLE urls (
 	id INTEGER IDENTITY,
 	url VARCHAR(500) NOT NULL UNIQUE,
-	status VARCHAR(10) DEFAULT 'NEW' NOT NULL CHECK (status IN ('NEW', 'WIP', 'DONE'))
+	status VARCHAR(10) DEFAULT 'NEW' NOT NULL,
+	CONSTRAINT chk_urls_status CHECK (status IN ('NEW', 'READY', 'WIP', 'DONE'))
 );
