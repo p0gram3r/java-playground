@@ -6,12 +6,12 @@ import static ae.picarchive.Configuration.DB_USER;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 
+import org.p0gram3r.jbulkurl.entity.BulkUrl;
+import org.p0gram3r.jbulkurl.generator.GeneratedUrlHandler;
+import org.p0gram3r.jbulkurl.parser.BaseReplacementParserFactory;
+import org.p0gram3r.jbulkurl.parser.BulkUrlParser;
 import org.skife.jdbi.v2.exceptions.UnableToExecuteStatementException;
 
-import ae.jbulkurl.entity.BulkUrl;
-import ae.jbulkurl.generator.GeneratedUrlHandler;
-import ae.jbulkurl.parser.BaseReplacementParserFactory;
-import ae.jbulkurl.parser.BulkUrlParser;
 import ae.picarchive.dao.DAOFactory;
 import ae.picarchive.dao.UrlDAO;
 
