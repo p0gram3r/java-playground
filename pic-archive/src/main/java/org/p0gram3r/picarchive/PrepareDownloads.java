@@ -24,6 +24,6 @@ public class PrepareDownloads {
         UrlDAO dao = daoFactory.getUrlDAO();
 
         System.out.println("Preparing " + limit + " urls for download...");
-        dao.markUrlsAsWip(limit);
+        dao.markMultipleUrlsAsReady(limit);
     }
 }
