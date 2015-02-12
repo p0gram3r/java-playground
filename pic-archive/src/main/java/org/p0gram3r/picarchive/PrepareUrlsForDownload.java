@@ -7,7 +7,7 @@ import static org.p0gram3r.picarchive.Configuration.DB_USER;
 import org.p0gram3r.picarchive.dao.DAOFactory;
 import org.p0gram3r.picarchive.dao.UrlDAO;
 
-public class PrepareDownloads {
+public class PrepareUrlsForDownload {
 
     public static void main(String[] args) {
         int limit = 10;
