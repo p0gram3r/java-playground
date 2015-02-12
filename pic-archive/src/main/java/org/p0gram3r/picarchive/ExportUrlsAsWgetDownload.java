@@ -10,7 +10,7 @@ import org.p0gram3r.picarchive.dao.DAOFactory;
 import org.p0gram3r.picarchive.dao.UrlDAO;
 import org.p0gram3r.picarchive.entity.Url;
 
-public class ExportWipUrlsAsWgetDownload {
+public class ExportUrlsAsWgetDownload {
 
     public static void main(String[] args) {
         String targetDir;
@@ -24,9 +24,10 @@ public class ExportWipUrlsAsWgetDownload {
         DAOFactory daoFactory = new DAOFactory(DB_URL, DB_USER, DB_PASS);
         UrlDAO dao = daoFactory.getUrlDAO();
 
-        List<Url> result = dao.getWipUrls();
+        List<Url> result = dao.getUrlsReadyForDownload();
         for (Url u : result) {
             System.out.println("wget -qO " + targetDir + "/" + u.getId() + " " + u.getUrl());
+            dao.markUrlAsWip(u);
         }
     }
 }
