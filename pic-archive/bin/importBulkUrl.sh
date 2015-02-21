@@ -11,8 +11,9 @@ if [[ "$#" == 2 && "$1" == "-f" ]]; then
 		exit -1
 	fi
 
-	echo "Reading content of file $2"
-	execJava ImportBulkUrl `cat $2`
+	echo "importing content of file $2"
+	while read line; do execJava ImportBulkUrl "$line"; done < "$2"
 else
+	echo "importing command line arguments"
 	execJava ImportBulkUrl "$@"
 fi
