@@ -4,7 +4,9 @@ import static org.p0gram3r.picarchive.Configuration.DB_PASS;
 import static org.p0gram3r.picarchive.Configuration.DB_URL;
 import static org.p0gram3r.picarchive.Configuration.DB_USER;
 
+import java.sql.BatchUpdateException;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.LinkedList;
 
 import org.p0gram3r.jbulkurl.entity.BulkUrl;
 import org.p0gram3r.jbulkurl.generator.GeneratedUrlHandler;
@@ -26,6 +28,8 @@ public class ImportBulkUrl {
             BulkUrl bulkUrl = parser.parse(url);
             bulkUrl.generateUrls(handler);
         }
+        handler.flushBuffer();
+
         System.out.println();
         System.out.println("DONE!");
         System.out.println("  new: " + handler.getSuccessCount());
@@ -36,9 +40,13 @@ public class ImportBulkUrl {
 class StoreUrlInDatabaseHandler implements GeneratedUrlHandler {
     private long successCount = 0, duplicateCount = 0;
     private UrlDAO dao;
+    private LinkedList<String> buffer;
+    private int maxBufferSize;
 
     public StoreUrlInDatabaseHandler(UrlDAO dao) {
         this.dao = dao;
+        this.buffer = new LinkedList<String>();
+        this.maxBufferSize = 500;
     }
 
     public long getSuccessCount() {
@@ -51,21 +59,48 @@ class StoreUrlInDatabaseHandler implements GeneratedUrlHandler {
 
     @Override
     public void handle(String generatedUrl) {
+        buffer.add(generatedUrl);
+
+        if (buffer.size() >= maxBufferSize) {
+            flushBuffer();
+            System.out.println("new / duplicate urls : " + successCount + " / " + duplicateCount);
+        }
+    }
+
+    public void flushBuffer() {
+        if (buffer.isEmpty()) {
+            return;
+        }
+
         try {
-            dao.storeNewUrl(generatedUrl);
-            successCount++;
+            dao.storeListOfNewUrl(buffer);
+            successCount += buffer.size();
         }
         catch (UnableToExecuteStatementException e) {
-            if (e.getCause() instanceof SQLIntegrityConstraintViolationException) {
-                duplicateCount++;
+            if (e.getCause() instanceof BatchUpdateException) {
+                sendEachEntrySeparatelyToDao();
             }
             else {
                 throw e;
             }
         }
+        buffer.clear();
+    }
 
-        if ((successCount + duplicateCount) % 100 == 0) {
-            System.out.println("new / duplicate urls : " + successCount + " / " + duplicateCount);
+    private void sendEachEntrySeparatelyToDao() {
+        for (String url : buffer) {
+            try {
+                dao.storeNewUrl(url);
+                successCount++;
+            }
+            catch (UnableToExecuteStatementException e) {
+                if (e.getCause() instanceof SQLIntegrityConstraintViolationException) {
+                    duplicateCount++;
+                }
+                else {
+                    throw e;
+                }
+            }
         }
     }
 }
