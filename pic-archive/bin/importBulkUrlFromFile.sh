@@ -5,4 +5,4 @@ BASEDIR=$(dirname $0)/..
 source $BASEDIR/bin/config.sh
 
 
-execJava ImportBulkUrl "$@"
+execJava ImportBulkUrlFromFile "$@"
