@@ -10,6 +10,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import org.p0gram3r.jbulkurl.entity.BulkUrl;
+import org.p0gram3r.jbulkurl.generator.GeneratedUrlHandler;
 import org.p0gram3r.jbulkurl.parser.BaseReplacementParserFactory;
 import org.p0gram3r.jbulkurl.parser.BulkUrlParser;
 import org.p0gram3r.picarchive.dao.DAOFactory;
@@ -25,7 +26,7 @@ public class ImportBulkUrlFromFile {
         BulkUrlParser parser = new BulkUrlParser(new BaseReplacementParserFactory());
         BufferedUrlPersistenceHandler handler = new BufferedUrlPersistenceHandler(dao);
         for (String fileName : args) {
-            asdF(fileName, parser, handler);
+            parseUrlsFromFile(fileName, parser, handler);
         }
         handler.flushBuffer();
 
@@ -35,7 +36,7 @@ public class ImportBulkUrlFromFile {
         System.out.println("  duplicates: " + handler.getDuplicateCount());
     }
 
-    private static boolean asdF(String fileName, BulkUrlParser parser, BufferedUrlPersistenceHandler handler) {
+    private static boolean parseUrlsFromFile(String fileName, BulkUrlParser parser, GeneratedUrlHandler handler) {
         boolean success = true;
         BufferedReader in = null;
         try {
