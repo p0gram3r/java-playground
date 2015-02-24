@@ -9,7 +9,7 @@ import org.p0gram3r.jbulkurl.parser.BaseReplacementParserFactory;
 import org.p0gram3r.jbulkurl.parser.BulkUrlParser;
 import org.p0gram3r.picarchive.dao.DAOFactory;
 import org.p0gram3r.picarchive.dao.UrlDAO;
-import org.p0gram3r.picarchive.util.StoreUrlInDatabaseHandler;
+import org.p0gram3r.picarchive.util.BufferedUrlPersistenceHandler;
 
 public class ImportBulkUrl {
 
@@ -18,7 +18,7 @@ public class ImportBulkUrl {
         UrlDAO dao = daoFactory.getUrlDAO();
 
         BulkUrlParser parser = new BulkUrlParser(new BaseReplacementParserFactory());
-        StoreUrlInDatabaseHandler handler = new StoreUrlInDatabaseHandler(dao);
+        BufferedUrlPersistenceHandler handler = new BufferedUrlPersistenceHandler(dao);
         for (String url : args) {
             BulkUrl bulkUrl = parser.parse(url);
             bulkUrl.generateUrls(handler);
