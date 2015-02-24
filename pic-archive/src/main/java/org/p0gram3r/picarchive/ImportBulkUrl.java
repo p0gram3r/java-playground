@@ -27,7 +27,7 @@ public class ImportBulkUrl {
 
         System.out.println();
         System.out.println("DONE!");
-        System.out.println("  new: " + handler.getSuccessCount());
+        System.out.println("  new: " + handler.getNewCount());
         System.out.println("  duplicates: " + handler.getDuplicateCount());
     }
 }
