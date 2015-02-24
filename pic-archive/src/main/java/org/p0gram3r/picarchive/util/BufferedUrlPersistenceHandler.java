@@ -38,7 +38,6 @@ public class BufferedUrlPersistenceHandler implements GeneratedUrlHandler {
 
         if (buffer.size() >= maxBufferSize) {
             flushBuffer();
-            System.out.println("new / duplicate urls : " + successCount + " / " + duplicateCount);
         }
     }
 
