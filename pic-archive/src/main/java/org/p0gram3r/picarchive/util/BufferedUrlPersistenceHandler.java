@@ -9,7 +9,7 @@ import org.p0gram3r.picarchive.dao.UrlDAO;
 import org.skife.jdbi.v2.exceptions.UnableToExecuteStatementException;
 
 public class BufferedUrlPersistenceHandler implements GeneratedUrlHandler {
-    private long successCount = 0, duplicateCount = 0;
+    private long newCount = 0, duplicateCount = 0;
     private UrlDAO dao;
     private LinkedList<String> buffer;
     private int maxBufferSize;
@@ -24,8 +24,8 @@ public class BufferedUrlPersistenceHandler implements GeneratedUrlHandler {
         this.maxBufferSize = bufferSize;
     }
 
-    public long getSuccessCount() {
-        return successCount;
+    public long getNewCount() {
+        return newCount;
     }
 
     public long getDuplicateCount() {
@@ -38,6 +38,7 @@ public class BufferedUrlPersistenceHandler implements GeneratedUrlHandler {
 
         if (buffer.size() >= maxBufferSize) {
             flushBuffer();
+            System.out.println(" new / duplicates: " + getNewCount() + " / " + getDuplicateCount());
         }
     }
 
@@ -48,7 +49,7 @@ public class BufferedUrlPersistenceHandler implements GeneratedUrlHandler {
 
         try {
             dao.storeListOfNewUrl(buffer);
-            successCount += buffer.size();
+            newCount += buffer.size();
         }
         catch (UnableToExecuteStatementException e) {
             if (e.getCause() instanceof BatchUpdateException) {
@@ -66,7 +67,7 @@ public class BufferedUrlPersistenceHandler implements GeneratedUrlHandler {
         for (String url : buffer) {
             try {
                 dao.storeNewUrl(url);
-                successCount++;
+                newCount++;
             }
             catch (UnableToExecuteStatementException e) {
                 if (e.getCause() instanceof SQLIntegrityConstraintViolationException) {
