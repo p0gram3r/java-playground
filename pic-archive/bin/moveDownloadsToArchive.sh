@@ -56,4 +56,7 @@ done
 
 execJava RegisterFile "$TMP_FILE"
 
+echo "removing mapping file $TMP_FILE"
+rm "$TMP_FILE"
+
 echo "finished archiving"
