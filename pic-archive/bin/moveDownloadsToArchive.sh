@@ -14,7 +14,10 @@ else
 fi
 
 
-FILE_COUNT=0
+TMP_FILE="$$.tmp"
+echo "creating mapping file $TMP_FILE"
+
+
 for FILE in ${DOWNLOAD_DIR}/*; do
   if [ ! -f $FILE ]; then
     continue
@@ -25,11 +28,10 @@ for FILE in ${DOWNLOAD_DIR}/*; do
   if [ $FILE_SIZE -lt $MINIMUM_FILE_SIZE ]; then
     echo "removing $FILE (file size < $MINIMUM_FILE_SIZE)"
     rm $FILE
-    FILE_COUNT=$(expr $FILE_COUNT + 1)
     continue;
   fi
 
-  # the MD5 hash is the basis fordetermines the target directory
+  # the MD5 hash is the new identifier of the file within the archive
   HASH=($(md5sum $FILE))
 
   # split the hash into 11 parts
@@ -43,19 +45,15 @@ for FILE in ${DOWNLOAD_DIR}/*; do
   PARENT_DIR="${ARCHIVE_DIR}/${PARTS[0]}/${PARTS[1]}/${PARTS[2]}/${PARTS[3]}/${PARTS[4]}/${PARTS[5]}/${PARTS[6]}/${PARTS[7]}/${PARTS[8]}/${PARTS[9]}/${PARTS[10]}"
   mkdir -p $PARENT_DIR
 
-  # register the file with the url
-  URL_ID=$(basename "$FILE")
+  # move the file to the archive
   TARGET_FILE_PATH="${PARENT_DIR}/${HASH}"
-  execJava RegisterFile "$URL_ID" "$TARGET_FILE_PATH"
-
-  # move the file
   mv "$FILE" "$TARGET_FILE_PATH"
 
-  # status update
-  FILE_COUNT=$(expr $FILE_COUNT + 1)
-  if [ $(expr $FILE_COUNT % 10) == 0 ]; then
-    echo "finished $FILE_COUNT of $TOTAL_FILE_COUNT"
-  fi
+  # register the file with the url
+  URL_ID=$(basename "$FILE")
+  echo "$URL_ID $HASH" >> $TMP_FILE
 done
 
-echo "finished $FILE_COUNT of $TOTAL_FILE_COUNT"
+execJava RegisterFile "$TMP_FILE"
+
+echo "finished archiving"

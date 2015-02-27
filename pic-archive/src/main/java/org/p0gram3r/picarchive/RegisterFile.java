@@ -4,45 +4,59 @@ import static org.p0gram3r.picarchive.Configuration.DB_PASS;
 import static org.p0gram3r.picarchive.Configuration.DB_URL;
 import static org.p0gram3r.picarchive.Configuration.DB_USER;
 
-import java.sql.SQLIntegrityConstraintViolationException;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.p0gram3r.picarchive.dao.DAOFactory;
-import org.p0gram3r.picarchive.dao.FileDAO;
 import org.p0gram3r.picarchive.dao.UrlDAO;
-import org.skife.jdbi.v2.exceptions.UnableToExecuteStatementException;
 
 public class RegisterFile {
 
-    public static void main(String[] args) {
-        if (args.length != 2) {
-            throw new IllegalArgumentException("usage: RegisterFile (urlId) (filePath)");
+    public static void main(String[] args) throws IOException {
+        if (args.length != 1) {
+            throw new IllegalArgumentException("usage: RegisterFile path/to/mapping-file");
         }
-
-        long urlId = Long.parseLong(args[0]);
-        String filePath = args[1];
 
         DAOFactory daoFactory = new DAOFactory(DB_URL, DB_USER, DB_PASS);
-
-        FileDAO fileDAO = daoFactory.getFileDAO();
-        Long fileId = registerFile(fileDAO, filePath);
-
         UrlDAO urlDAO = daoFactory.getUrlDAO();
-        urlDAO.linkFileWithUrl(urlId, fileId);
-    }
 
-    private static Long registerFile(FileDAO fileDAO, String filePath) {
-        try {
-            fileDAO.registerFile(filePath);
-        }
-        catch (UnableToExecuteStatementException e) {
-            if (e.getCause() instanceof SQLIntegrityConstraintViolationException) {
-                // ignore -> we tried to register the same file twice
-            }
-            else {
-                throw e;
-            }
+        File mappingFile = new File(args[0]);
+        if (!mappingFile.exists()) {
+            System.out.println("File not found: " + mappingFile.getCanonicalPath());
+            System.exit(1);
         }
 
-        return fileDAO.getFileIdByPath(filePath);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(mappingFile)));
+        System.out.println("reading mapping file: " + mappingFile.getCanonicalPath());
+
+        String line;
+        List<Long> urlIdList = new LinkedList<Long>();
+        List<String> fileHashList = new LinkedList<String>();
+        while ((line = reader.readLine()) != null) {
+            String[] parts = line.split(" ");
+            if (parts.length != 2) {
+                System.out.println("unable to process mapping: '" + line + "'");
+                continue;
+            }
+
+            urlIdList.add(Long.parseLong(parts[0]));
+            fileHashList.add(parts[1]);
+
+            if (urlIdList.size() >= 1000) {
+                urlDAO.addFileHashToUrl(urlIdList, fileHashList);
+                urlIdList.clear();
+                fileHashList.clear();
+            }
+        }
+
+        urlDAO.addFileHashToUrl(urlIdList, fileHashList);
+
+        reader.close();
+        System.out.println("finished mapping process");
     }
 }

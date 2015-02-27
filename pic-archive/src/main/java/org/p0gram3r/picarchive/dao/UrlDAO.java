@@ -29,6 +29,6 @@ public interface UrlDAO {
     @RegisterMapper(UrlMapper.class)
     List<Url> getUrlsReadyForDownload();
 
-    @SqlUpdate("UPDATE urls SET fileId = :fileId , status = 'DONE' WHERE id = :urlId")
-    void linkFileWithUrl(@Bind("urlId") long urlId, @Bind("fileId") long fileId);
+    @SqlBatch("UPDATE urls SET fileHash = :fileHash, status = 'DONE' WHERE id = :urlId")
+    void addFileHashToUrl(@Bind("urlId") List<Long> urlIdList, @Bind("fileHash") List<String> fileHashList);
 }
