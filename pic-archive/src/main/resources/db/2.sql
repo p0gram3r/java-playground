@@ -1,12 +1,3 @@
-CREATE TABLE files (
-    id INTEGER IDENTITY, 
-    path VARCHAR(500) UNIQUE NOT NULL 
-);
-
-
 ALTER TABLE urls 
-    ADD COLUMN fileId INTEGER;
-
-
-ALTER TABLE urls
-    ADD CONSTRAINT urls_fk_fileId FOREIGN KEY (fileId) REFERENCES files (id);
+    ADD COLUMN fileHash char(32)
+;
