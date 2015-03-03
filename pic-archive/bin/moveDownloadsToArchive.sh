@@ -1,8 +1,8 @@
 #!/bin/bash
 
-BASEDIR=$(dirname $0)/..
+CODE_DIR=$(dirname $0)/..
 
-source $BASEDIR/bin/config.sh
+source $CODE_DIR/bin/config.sh
 
 
 TOTAL_FILE_COUNT=$(ls ${DOWNLOAD_DIR}/ | wc -l)
@@ -18,10 +18,13 @@ TMP_FILE="$$.tmp"
 echo "creating mapping file $TMP_FILE"
 
 
+FILE_COUNT=0
 for FILE in ${DOWNLOAD_DIR}/*; do
   if [ ! -f $FILE ]; then
     continue
   fi
+
+  FILE_COUNT=$(expr $FILE_COUNT + 1)
 
   # filter small and empty files
   FILE_SIZE=$(wc -c "$FILE" | cut -f 1 -d ' ')
@@ -52,11 +55,17 @@ for FILE in ${DOWNLOAD_DIR}/*; do
   # register the file with the url
   URL_ID=$(basename "$FILE")
   echo "$URL_ID $HASH" >> $TMP_FILE
+  
+  # status update
+  if [ $(expr $FILE_COUNT % 100) == 0 ]; then
+    echo "finished $FILE_COUNT of $TOTAL_FILE_COUNT"
+  fi
 done
 
 execJava RegisterFile "$TMP_FILE"
 
-echo "removing mapping file $TMP_FILE"
-rm "$TMP_FILE"
+echo "TODO: backup mapping file!"
+# echo "removing mapping file $TMP_FILE"
+# rm "$TMP_FILE"
 
 echo "finished archiving"

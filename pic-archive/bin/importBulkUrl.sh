@@ -1,8 +1,8 @@
 #!/bin/bash
 
-BASEDIR=$(dirname $0)/..
+CODE_DIR=$(dirname $0)/..
 
-source $BASEDIR/bin/config.sh
+source $CODE_DIR/bin/config.sh
 
 
 execJava ImportBulkUrl "$@"
