@@ -16,6 +16,7 @@ fi
 
 TMP_FILE="/tmp/mapping_$(date +%Y-%m-%d)_$$.tmp"
 echo "creating mapping file $TMP_FILE"
+touch $TMP_FILE
 
 
 FILE_COUNT=0
