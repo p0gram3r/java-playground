@@ -14,7 +14,7 @@ else
 fi
 
 
-TMP_FILE="$$.tmp"
+TMP_FILE="/tmp/mapping_$(date +%Y-%m-%d)_$$.tmp"
 echo "creating mapping file $TMP_FILE"
 
 
@@ -62,10 +62,10 @@ for FILE in ${DOWNLOAD_DIR}/*; do
   fi
 done
 
+# register file hashes in database
 execJava RegisterFile "$TMP_FILE"
 
-echo "TODO: backup mapping file!"
-# echo "removing mapping file $TMP_FILE"
-# rm "$TMP_FILE"
+# save backup of mapping file
+mv ${TMP_FILE} ${BACKUP_DIR}
 
 echo "finished archiving"
