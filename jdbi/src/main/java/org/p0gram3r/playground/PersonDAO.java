@@ -1,4 +1,4 @@
-package ae.test.jdbi;
+package org.p0gram3r.playground;
 
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;

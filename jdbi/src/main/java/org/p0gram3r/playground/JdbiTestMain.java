@@ -1,4 +1,4 @@
-package ae.test.jdbi;
+package org.p0gram3r.playground;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
