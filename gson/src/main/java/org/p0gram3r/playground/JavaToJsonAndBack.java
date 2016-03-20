@@ -6,7 +6,7 @@ import com.google.gson.FieldNamingStrategy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-public class GsonTestMain {
+public class JavaToJsonAndBack {
 
     public static void main(String[] args) {
         GsonBuilder builder = new GsonBuilder();
