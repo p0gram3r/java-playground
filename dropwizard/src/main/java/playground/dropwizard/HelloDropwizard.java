@@ -1,4 +1,4 @@
-package ae.test.dropwizard;
+package playground.dropwizard;
 
 public class HelloDropwizard
 {
