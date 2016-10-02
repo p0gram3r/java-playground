@@ -1,17 +1,11 @@
 package problem;
 
-import com.google.common.collect.ImmutableSet;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Collection;
-import java.util.LinkedHashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
-import java.util.Set;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
+import java.util.stream.LongStream;
 
 /**
  * For a positive integer n, define f(n) as the least positive multiple of n that, written in base 10, uses only
@@ -29,95 +23,95 @@ public class P303_MultiplesWithSmallDigits implements Problem {
 
     @Override
     public Object getSolution() {
-
         try {
-            File file = new File("multiples_of_n.txt");
+            Map<Long, Long> mapping = getMappingUsingNumberGenerator(10000);
 
-            Set<String> values = ImmutableSet.of("0", "1", "2");
-            Collection<String> perms = createPermutations(values, values, 1, 12);
-            writeToTempFile(perms, file);
-
-            int nCount = 100;
-
-            Map<Long, Long> mapping = getMapping(file, nCount);
-            if (mapping.size() != nCount) {
-                throw new RuntimeException("mapping does not contain all necessary values!");
-            }
-
-            long result = 0;
-            for (Long m : mapping.values()) {
+            Long result = 0L;
+            for (Map.Entry<Long, Long> entry : mapping.entrySet()) {
+                Long m = entry.getValue();
                 result += m;
             }
+
             return result;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    Map<Long, Long> getMapping(File fileWithMultiples, int nCount) throws FileNotFoundException {
+    /**
+     * This mapping only works for nCount <= 10000! this is because the calculation for 9999 would exceed Long
+     * and we therefore would have to use BigInteger for all the calculation
+     */
+    Map<Long, Long> getMappingUsingNumberGenerator(int nCount) {
         Map<Long, Long> mapping = new TreeMap<>();
-
-        Scanner scanner = new Scanner(fileWithMultiples);
-        while (scanner.hasNext()) {
-            String line = scanner.nextLine();
-
-            // avoid useless computation
-            if (mapping.size() == nCount - 2)
-            {
-                break;
-            }
-
-            // ignore illegal values
-            if (!line.matches(F_REGEX)) {
-                System.err.println("line does not match regex: " + line);
-                continue;
-            }
-
-            // 0 is trivial and can be ignored
-            Long multiple = Long.valueOf(line);
-            if (multiple == 0) {
-                continue;
-            }
-
-            for (long n = nCount; n > 2; n--) {
-                long m = multiple / n;
-                if (n * m == multiple) {
-                    Long oldM = mapping.get(n);
-                    if (oldM == null || m < oldM) {
-                        mapping.put(n, m);
-                    }
-                }
-            }
-        }
+        ResultNumberGenerator resultNumberGenerator = new ResultNumberGenerator();
 
         // add trivial values
         mapping.put(1L, 1L);
         mapping.put(2L, 1L);
 
+        // this value was derived from 9, 99 and 999
+        // to calculate it, we would have to modify the code to use BigInteger as the product of these numbers
+        // exceeds Long.MAX_VALUE
+        mapping.put(9999L, 1111333355557778L);
+
+        List<Long> keysToCheck = LongStream
+                .rangeClosed(1, nCount)
+                .mapToObj(l -> l)
+                .collect(Collectors.toList());
+        keysToCheck.removeAll(mapping.keySet());
+
+        while (mapping.size() < nCount) {
+            String value = resultNumberGenerator.nextValue();
+
+            long product = Long.parseLong(value);
+            for (Iterator<Long> it = keysToCheck.iterator(); it.hasNext(); ) {
+                long n = it.next();
+                long m = product / n;
+                long product2 = n * m ;
+                if (product2 == product) {
+                    mapping.put(n, m);
+                    it.remove();
+                }
+            }
+        }
+
         return mapping;
     }
 
-    void writeToTempFile(Collection<String> data, File file) throws IOException {
-        PrintWriter w = new PrintWriter(file);
-        for (String p : data) {
-            w.println(p);
-        }
-        w.flush();
-    }
+    class ResultNumberGenerator {
+        private StringBuilder nextValue = new StringBuilder("1");
+        private int lastCharIndex = 0;
 
-    Collection<String> createPermutations(Set<String> allPrefixes, Set<String> values, int count, int maxCount) {
-        if (count >= maxCount) {
-            return allPrefixes;
+        private String nextValue() {
+            String next = nextValue.toString();
+            updateCharAtIndex(lastCharIndex);
+            return next;
         }
 
-        Set<String> newPrefixes = new LinkedHashSet<>();
-        newPrefixes.addAll(allPrefixes);
-        for (String p : allPrefixes) {
-            for (String v : values) {
-                newPrefixes.add("" + p + v);
+        private void updateCharAtIndex(int index) {
+            if (index == -1) {
+                lastCharIndex++;
+                nextValue.insert(0, "1");
+                return;
+            }
+
+            char c = nextValue.charAt(index);
+            switch (c) {
+                case '0':
+                    nextValue.replace(index, index + 1, "1");
+                    break;
+                case '1':
+                    nextValue.replace(index, index + 1, "2");
+                    break;
+                case '2':
+                    nextValue.replace(index, index + 1, "0");
+                    updateCharAtIndex(index - 1);
+                    break;
+                default:
+                    throw new IllegalArgumentException();
             }
         }
-        return (createPermutations(newPrefixes, values, count + 1, maxCount));
     }
 
 }
