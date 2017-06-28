@@ -20,7 +20,7 @@ public class P016_PowerDigitSum implements Problem {
         String s = number.toString();
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(s.length() - i - 1);
-            sumOfDigits += Long.valueOf(new StringBuilder().append(c).toString());
+            sumOfDigits += Long.valueOf(String.valueOf(c));
         }
 
         return sumOfDigits;
