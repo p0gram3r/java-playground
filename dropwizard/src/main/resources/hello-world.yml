@@ -1,4 +1,7 @@
 template: Hello, %s!
 defaultName: Stranger
 
+swagger:
+  resourcePackage: playground.dropwizard.resource
+
 foo: ${foo:-bar}

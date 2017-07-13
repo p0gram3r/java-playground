@@ -6,16 +6,18 @@ import io.dropwizard.configuration.ResourceConfigurationSourceProvider;
 import io.dropwizard.configuration.SubstitutingSourceProvider;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import io.federecio.dropwizard.swagger.SwaggerBundle;
+import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import org.apache.commons.lang3.text.StrSubstitutor;
-import playground.dropwizard.config.HelloWorldConfiguration;
+import playground.dropwizard.config.ServiceConfiguration;
 import playground.dropwizard.health.TemplateHealthCheck;
-import playground.dropwizard.resource.HelloWorldResource;
+import playground.dropwizard.resource.HelloResource;
 
 import java.util.Map;
 
 import static com.google.common.collect.Maps.fromProperties;
 
-public class HelloWorldApplication extends Application<HelloWorldConfiguration> {
+public class HelloWorldApplication extends Application<ServiceConfiguration> {
 
     public static void main(String[] args) throws Exception {
         new HelloWorldApplication().run(args);
@@ -27,16 +29,19 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
     }
 
     @Override
-    public void initialize(Bootstrap<HelloWorldConfiguration> bootstrap) {
+    public void initialize(Bootstrap<ServiceConfiguration> bootstrap) {
         bootstrap.setConfigurationSourceProvider(new SubstitutingSourceProvider(
             new ResourceConfigurationSourceProvider(),
             new StrSubstitutor(resolveEnvironmentProperties())
         ));
+
+        initSwaggerBundle(bootstrap);
     }
 
+
     @Override
-    public void run(HelloWorldConfiguration configuration, Environment environment) {
-        final HelloWorldResource resource = new HelloWorldResource(
+    public void run(ServiceConfiguration configuration, Environment environment) {
+        final HelloResource resource = new HelloResource(
             configuration.template,
             configuration.defaultName
         );
@@ -51,5 +56,14 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
             .putAll(System.getenv())
             .putAll(fromProperties(System.getProperties()))
             .build();
+    }
+
+    private void initSwaggerBundle(Bootstrap<ServiceConfiguration> bootstrap) {
+        bootstrap.addBundle(new SwaggerBundle<ServiceConfiguration>() {
+            @Override
+            protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(ServiceConfiguration cfg) {
+                return cfg.swaggerBundleConfiguration;
+            }
+        });
     }
 }
