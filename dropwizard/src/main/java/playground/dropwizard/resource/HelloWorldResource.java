@@ -1,4 +1,4 @@
-package playground.dropwizard;
+package playground.dropwizard.resource;
 
 import com.codahale.metrics.annotation.Timed;
 import playground.dropwizard.api.Saying;
