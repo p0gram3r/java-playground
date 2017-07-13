@@ -1,11 +1,19 @@
 package playground.dropwizard;
 
+import com.google.common.collect.ImmutableMap;
 import io.dropwizard.Application;
+import io.dropwizard.configuration.ResourceConfigurationSourceProvider;
+import io.dropwizard.configuration.SubstitutingSourceProvider;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import org.apache.commons.lang3.text.StrSubstitutor;
 import playground.dropwizard.config.HelloWorldConfiguration;
 import playground.dropwizard.health.TemplateHealthCheck;
 import playground.dropwizard.resource.HelloWorldResource;
+
+import java.util.Map;
+
+import static com.google.common.collect.Maps.fromProperties;
 
 public class HelloWorldApplication extends Application<HelloWorldConfiguration> {
 
@@ -20,16 +28,17 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
 
     @Override
     public void initialize(Bootstrap<HelloWorldConfiguration> bootstrap) {
-        // TODO optimize
-        bootstrap.setConfigurationSourceProvider(p -> getClass().getClassLoader().getResourceAsStream(p));
-
+        bootstrap.setConfigurationSourceProvider(new SubstitutingSourceProvider(
+            new ResourceConfigurationSourceProvider(),
+            new StrSubstitutor(resolveEnvironmentProperties())
+        ));
     }
 
     @Override
     public void run(HelloWorldConfiguration configuration, Environment environment) {
         final HelloWorldResource resource = new HelloWorldResource(
-                configuration.template,
-                configuration.defaultName
+            configuration.template,
+            configuration.defaultName
         );
         final TemplateHealthCheck healthCheck = new TemplateHealthCheck(configuration.template);
 
@@ -37,4 +46,10 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
         environment.jersey().register(resource);
     }
 
+    private Map<String, String> resolveEnvironmentProperties() {
+        return ImmutableMap.<String, String>builder()
+            .putAll(System.getenv())
+            .putAll(fromProperties(System.getProperties()))
+            .build();
+    }
 }
