@@ -1,0 +1,1 @@
+Simple example of processing a custom annotation using AspectJ. 
