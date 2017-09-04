@@ -1,13 +1,13 @@
 package org.p0gram3r.playground.securepasswordhashes;
 
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
+
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
-
-import javax.crypto.SecretKey;
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
 
 public class SecurePasswordHashesMain {
 
@@ -35,10 +35,7 @@ public class SecurePasswordHashesMain {
             byte[] hashedPassword = secretKey.getEncoded();
             return String.format("%x", new BigInteger(hashedPassword));
         }
-        catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
-        catch (InvalidKeySpecException e) {
+        catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             throw new RuntimeException(e);
         }
     }
