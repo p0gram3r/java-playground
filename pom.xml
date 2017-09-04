@@ -13,7 +13,7 @@
         <module>gson</module>
         <module>jdbi</module>
         <module>secure-password-hashes</module>
-        <module>jersey</module>
+        <module>rest-clients</module>
     </modules>
 
 </project>
