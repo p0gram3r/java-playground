@@ -1,3 +1,1 @@
-#java-playgound
-
-playground for some very basic java programs
+playground for java libs and frameworks
