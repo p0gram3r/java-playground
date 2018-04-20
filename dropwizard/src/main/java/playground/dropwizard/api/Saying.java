@@ -1,7 +1,8 @@
 package playground.dropwizard.api;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.Length;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Saying {
     private long id;

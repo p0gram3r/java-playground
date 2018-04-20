@@ -4,7 +4,7 @@ import static com.google.common.collect.Maps.fromProperties;
 
 import java.util.Map;
 
-import org.apache.commons.lang3.text.StrSubstitutor;
+import org.apache.commons.text.StrSubstitutor;
 
 import com.google.common.collect.ImmutableMap;
 
@@ -26,8 +26,13 @@ public class HelloWorldApplication extends Application<ServiceConfiguration> {
     }
 
     @Override
+    public String getName() {
+        return "hello-dropwizard";
+    }
+
+    @Override
     public void initialize(Bootstrap<ServiceConfiguration> bootstrap) {
-        // read System Properties and ENV variables and
+        // read System Properties and ENV variables
         bootstrap.setConfigurationSourceProvider(new SubstitutingSourceProvider(
             new ResourceConfigurationSourceProvider(),
             new StrSubstitutor(resolveEnvironmentProperties())
@@ -41,7 +46,6 @@ public class HelloWorldApplication extends Application<ServiceConfiguration> {
             }
         });
     }
-
 
     @Override
     public void run(ServiceConfiguration configuration, Environment environment) {

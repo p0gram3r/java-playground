@@ -1,7 +1,12 @@
 template: Hello, %s!
-defaultName: Stranger
+defaultName: ${defaultName:-Stranger}
 
 swagger:
   resourcePackage: playground.dropwizard.resource
 
-foo: ${foo:-bar}
+server:
+  requestLog:
+    appenders:
+      - type: file
+        currentLogFilename: ${logDir:-logs}/access.log
+        archivedLogFilenamePattern: ${logDir:-logs}/access.%d.log.gz
