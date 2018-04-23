@@ -54,9 +54,10 @@ public class HelloWorldApplication extends Application<ServiceConfiguration> {
             configuration.defaultName
         );
 
-        environment.jersey().register(helloResource);
+        final TemplateHealthCheck healthCheck = new TemplateHealthCheck(configuration.template);
 
-        environment.healthChecks().register("template", new TemplateHealthCheck(configuration.template));
+        environment.jersey().register(helloResource);
+        environment.healthChecks().register("template", healthCheck);
     }
 
     private Map<String, String> resolveEnvironmentProperties() {
