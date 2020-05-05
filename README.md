@@ -1,1 +1,3 @@
-playground for java libs and frameworks
+This is a playground for evaluating java libs and frameworks. 
+
+Plain hacking, little quality and style :-)

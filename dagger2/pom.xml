@@ -3,7 +3,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>it.p0gram3r.playground</groupId>
-    <artifactId>dagger2-turorial</artifactId>
+    <artifactId>dagger2</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <properties>
