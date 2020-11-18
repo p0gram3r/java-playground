@@ -6,25 +6,34 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
+import java.io.File;
+
 import static lombok.AccessLevel.PRIVATE;
 
 public class LombokTest {
     public static void main(String[] args) {
-        final Country usa = Country.of("USA");
-
-        final City springfield = City.builder()
-                .name("Springfield")
-                .zip("1337")
-                .country(usa)
+        Message message = Message.builder()
+                .sender("user@somedomain.com")
+                .recipient("someuser@otherdomain.com")
+                .text("How are you today?")
+                .file(new File("/path/to/file"))
                 .build();
 
-        final User homer = User.builder()
-                .firstName("homer")
-                .lastName("simpson")
-                .city(springfield)
-                .build();
-
-        System.out.println(homer);
+//        final Country usa = Country.of("USA");
+//
+//        final City springfield = City.builder()
+//                .name("Springfield")
+//                .zip("1337")
+//                .country(usa)
+//                .build();
+//
+//        final User homer = User.builder()
+//                .firstName("homer")
+//                .lastName("simpson")
+//                .city(springfield)
+//                .build();
+//
+//        System.out.println(homer);
     }
 }
 
