@@ -1,22 +1,22 @@
 package it.p0gram3r.playground;
 
+import static lombok.AccessLevel.PRIVATE;
+
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
 
-import java.io.File;
-
-import static lombok.AccessLevel.PRIVATE;
-
+@Slf4j
 public class LombokTest {
     public static void main(String[] args) {
         Message message = Message.builder()
                 .sender("user@somedomain.com")
                 .recipient("someuser@otherdomain.com")
                 .text("How are you today?")
-                .file(new File("/path/to/file"))
+//                .file(new File("/path/to/file"))
                 .build();
 
 //        final Country usa = Country.of("USA");
@@ -34,6 +34,7 @@ public class LombokTest {
 //                .build();
 //
 //        System.out.println(homer);
+        log.info("{}", message);
     }
 }
 
